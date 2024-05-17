@@ -18,7 +18,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.System
             while(print != 0)
             {
                 Console.WriteLine("Hi choose your Application u want to use \n" +
-                "1 – Bank App | 2 – Sport App | 3 – Transportation App | 4 – Draft App | 0- Exit");
+                "1 – Bank App | 2 – Sport App | 3 – Transportation App | 4 – Draft App | 0 - Exit");
 
                 print = int.Parse(Console.ReadLine());
                 switch (print)
@@ -38,8 +38,8 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.System
                     case 4:
                         DraftAppMain.MainEntry();
                         break;
-                        default:
-                        Console.WriteLine("i dont have any Applications in this number u choose try again");
+                    default:
+                        Console.WriteLine("i dont have any Applications in the number u choose try again please");
                         break ;
                 }
             }
