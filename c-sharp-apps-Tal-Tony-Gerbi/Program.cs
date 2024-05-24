@@ -1,2 +1,8 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using c_sharp_apps_Tal_Tony_Gerbi.System;
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        ProcessManager.MainProcess();
+    }
+}
