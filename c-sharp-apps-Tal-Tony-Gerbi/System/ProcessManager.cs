@@ -9,7 +9,7 @@ using c_sharp_apps_Tal_Tony_Gerbi.BankApp;
 using c_sharp_apps_Tal_Tony_Gerbi.TransportationApp;
 namespace c_sharp_apps_Tal_Tony_Gerbi.System
 {
-    internal class ProcessManager
+    public class ProcessManager
     {
         public static int print=1;
         public static void MainProcess()
