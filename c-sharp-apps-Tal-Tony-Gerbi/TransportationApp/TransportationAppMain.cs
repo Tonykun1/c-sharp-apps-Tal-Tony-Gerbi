@@ -10,7 +10,10 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp
     {
         public static void MainEntry()
         {
+            Console.WriteLine();
             Console.WriteLine("Name of application is TransportationApp");
+            Console.WriteLine("Thanks u choose in TransportationApp what i can help u");
+            Console.WriteLine();
         }
     }
 }
