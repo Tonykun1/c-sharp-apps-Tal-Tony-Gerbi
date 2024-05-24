@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace c_sharp_apps_Tal_Tony_Gerbi.SportApp
 {
-    internal class SportAppMain
+    public class SportAppMain
     {
         public static void MainEntry()
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace c_sharp_apps_Tal_Tony_Gerbi.BankApp
 {
-    internal class BankAppMain
+    public class BankAppMain
     {
         public static void MainEntry()
         {
