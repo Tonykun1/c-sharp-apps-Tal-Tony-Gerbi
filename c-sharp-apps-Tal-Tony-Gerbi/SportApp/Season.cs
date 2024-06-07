@@ -43,7 +43,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.SportApp
         {
             for(int i = 0; i < this.teams.Length; i++)
             {
-                Console.WriteLine($"Team {i}: {this.teams[i].GetName()} | Point: {this.teams[i].GetPoints()} ");
+                Console.WriteLine($"Team {i+1}: {this.teams[i].GetName()} | Point: {this.teams[i].GetPoints()} ");
             }
             
         }

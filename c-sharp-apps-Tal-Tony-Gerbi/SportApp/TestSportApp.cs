@@ -15,7 +15,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.SportApp
 
             Console.WriteLine("Test 1 - champions league mock");
             Season[] groups = CreateChampionsLeagueMock();
-
+            Console.WriteLine();
             for (int i = 0; i < groups.Length; i++)
             {
                 groups[i].DisplayTable();
