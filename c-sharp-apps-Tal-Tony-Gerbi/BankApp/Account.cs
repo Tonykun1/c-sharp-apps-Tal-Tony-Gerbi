@@ -33,7 +33,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.BankApp
         }
         public void SetOverdraft(int overdraft)
         {
-            if (overdraft < MAX_OVERDRAFT)
+            if (overdraft <= MAX_OVERDRAFT)
             {
                 this.overdraft = overdraft;
             }
@@ -46,7 +46,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.BankApp
 
         public void Withdraw(double amount)
         {
-            if (this.balance - amount > -this.overdraft)
+            if (this.balance - amount >= -this.overdraft)
                 this.balance -= amount;
         }
     }
