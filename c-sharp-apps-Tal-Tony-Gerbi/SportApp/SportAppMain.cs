@@ -10,10 +10,8 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.SportApp
     {
         public static void MainEntry()
         {
-            Console.WriteLine();
-            Console.WriteLine("Name of application is SportApp");
-            Console.WriteLine("Thanks u choose in SportApp what i can help u");
-            Console.WriteLine();
+            Console.WriteLine("SportApp");
+            TestSportApp.Test1();
 
         }
     }
