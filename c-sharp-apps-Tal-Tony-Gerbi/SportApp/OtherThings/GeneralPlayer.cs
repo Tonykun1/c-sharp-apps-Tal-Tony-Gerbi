@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -76,6 +77,10 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.SportApp.OtherThings
         {
             this.fouls++;
         }
+        public override string ToString()
+        {
+            return $"name {this.scoreName}, assists {this.assists}, points {this.points},fouls {this.fouls} ,outOfGame {this.outOfGame}" ;
+        }
     }
     public class BasketBallPlayer : GeneralPlayer
     {
@@ -135,6 +140,10 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.SportApp.OtherThings
             this.threeShots++;
             Console.WriteLine($"{this.scoreName} scored a three-pointer");
         }
+        public override string ToString()
+        {
+            return $" {base.ToString()} ,dunks {dunks}, threeShots {threeShots},  rebounds {rebounds}";
+        }
     }
     public class SoccerPlayer : GeneralPlayer
     {
@@ -178,6 +187,10 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.SportApp.OtherThings
                 this.outOfGame = true;
                 Console.WriteLine($"{this.scoreName} received a red card and is out of the game.");
             }
+        }
+        public override string ToString()
+        {
+            return $" {base.ToString()} ,redCard {redCard}, penalties {penalties},  dribblingRate {dribblingRate}";
         }
     }
 }
