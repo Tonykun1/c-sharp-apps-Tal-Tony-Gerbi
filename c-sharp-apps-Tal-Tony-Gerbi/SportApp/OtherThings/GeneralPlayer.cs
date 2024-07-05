@@ -10,19 +10,17 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.SportApp.OtherThings
 {
     public class GeneralPlayer
     {
-        protected int points;
-        protected string scoreName;
-        protected int assists;
-        protected int fouls;
-        protected bool outOfGame;
+        private int points=0;
+        private string scoreName="";
+        private string name="";
+        private int assists=0;
+        private int fouls = 0;
+        private bool outOfGame=false;
 
-        public GeneralPlayer()
+        public GeneralPlayer(string name,string scoreName)
         {
-            this.points = 0;
-            this.scoreName = "";
-            this.assists = 0;
-            this.fouls = 0;
-            this.outOfGame = false;
+            this.scoreName = scoreName;
+            this.name = name;
         }
         public int GetPoints()
         {
@@ -64,6 +62,14 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.SportApp.OtherThings
         {
             this.outOfGame = outOfGame;
         }
+        public string GetName()
+        {
+            return name;
+        }
+        public void SetName(string name)
+        {
+            this.name = name;
+        }
         public virtual void ScoreField()
         {
             this.points++;
@@ -71,7 +77,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.SportApp.OtherThings
         }
         public void DisplayScore()
         {
-            Console.WriteLine($"{this.scoreName} scored a GOAL");
+            Console.WriteLine($"{this.name} scored a {this.scoreName}!");
         }
         public virtual void AddFoul()
         {
@@ -84,15 +90,19 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.SportApp.OtherThings
     }
     public class BasketBallPlayer : GeneralPlayer
     {
-        private int dunks;
-        private int threeShots;
-        private int rebounds;
+        private int dunks = 0;
+        private int threeShots = 0;
+        private int rebounds = 0;
 
-        public BasketBallPlayer() : base()
+        public BasketBallPlayer(string name,string scoreName) : base(name,scoreName)
         {
-            this.dunks = 0;
-            this.threeShots = 0;
-            this.rebounds = 0;
+
+        }
+        public BasketBallPlayer(string name, string scoreName,int dunks,int threeShots,int rebounds) : base(name, scoreName)
+        {
+            this.dunks = dunks;
+            this.threeShots = threeShots;
+            this.rebounds = rebounds;
         }
         public int GetThreeShots()
         {
@@ -120,25 +130,26 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.SportApp.OtherThings
         }
         public override void ScoreField()
         {
-            this.points += 2;
-            Console.WriteLine($"{this.scoreName} scored a basket");
+
+            SetPoints(base.GetPoints()+2);
+            DisplayScore();
         }
 
         public override void AddFoul()
         {
-            this.fouls++;
-            if (this.fouls >= 5)
+            base.AddFoul();
+            if (GetFouls() == 5)
             {
-                this.outOfGame = true;
-                Console.WriteLine($"{this.scoreName} is out of the game");
+                SetOutOfGame(true);
+                Console.WriteLine($"{GetName()} is out of the game");
             }
         }
 
         public void Score3()
         {
-            this.points += 3;
+            SetPoints(base.GetPoints() + 3);
             this.threeShots++;
-            Console.WriteLine($"{this.scoreName} scored a three-pointer");
+            DisplayScore();
         }
         public override string ToString()
         {
@@ -147,15 +158,13 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.SportApp.OtherThings
     }
     public class SoccerPlayer : GeneralPlayer
     {
-        private bool redCard;
-        private int penalties;
-        private int dribblingRate;
+        private bool redCard=false;
+        private int penalties=0;
+        private int dribblingRate=0;
 
-        public SoccerPlayer() : base()
+        public SoccerPlayer(string name,string scoreName) : base(name,scoreName)
         {
-            this.redCard = false;
-            this.penalties = 0;
-            this.dribblingRate = 0;
+
         }
         public void SetDribblingRate(int dribblingRate)
         {
@@ -172,11 +181,11 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.SportApp.OtherThings
         }
         public override void AddFoul()
         {
-            this.fouls++;
+            base.AddFoul();
             if (this.redCard)
             {
-                this.outOfGame = true;
-                Console.WriteLine($"{this.scoreName} is out of the game due to a red card.");
+                SetOutOfGame(true);
+                Console.WriteLine($"{GetName()} is out of the game due to a red card.");
             }
         }
         public void SetRedCard(bool redCard)
@@ -184,8 +193,8 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.SportApp.OtherThings
             this.redCard = redCard;
             if (redCard)
             {
-                this.outOfGame = true;
-                Console.WriteLine($"{this.scoreName} received a red card and is out of the game.");
+                SetOutOfGame(true);
+                Console.WriteLine($"{GetName()} received a red card and is out of the game.");
             }
         }
         public override string ToString()
