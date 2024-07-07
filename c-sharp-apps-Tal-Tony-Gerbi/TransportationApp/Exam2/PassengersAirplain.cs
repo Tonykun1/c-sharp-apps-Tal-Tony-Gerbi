@@ -43,7 +43,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam2
 
         public override string ToString()
         {
-            return $"PassengersAirplane: {base.ToString()}, EnginesNum={EnginesNum}, WingLength={WingLength}, Rows={Rows}, Columns={Columns}";
+            return $"{base.ToString()} => PassengersAirplane: EnginesNum={EnginesNum}, WingLength={WingLength}, Rows={Rows}, Columns={Columns}";
         }
     }
 }
