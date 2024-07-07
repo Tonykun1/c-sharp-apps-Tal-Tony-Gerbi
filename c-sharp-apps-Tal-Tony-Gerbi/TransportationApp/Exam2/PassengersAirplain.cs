@@ -18,10 +18,10 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam2
         public PassengersAirplain(int line, int id, int enginesNum, int wingLength, int rows, int columns)
             : base(line, id, 0, rows * columns - 7)
         {
-            this.enginesNum = enginesNum;
-            this.wingLength = wingLength;
-            this.rows = rows;
-            this.columns = columns;
+            this.EnginesNum = enginesNum;
+            this.WingLength = wingLength;
+            this.Rows = rows;
+            this.Columns = columns;
         }
 
         public override int MaxSpeed
@@ -36,9 +36,14 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam2
             }
         }
 
+        public int EnginesNum { get => enginesNum; set => enginesNum = value; }
+        public int WingLength { get => wingLength; set => wingLength = value; }
+        public int Rows { get => rows; set => rows = value; }
+        public int Columns { get => columns; set => columns = value; }
+
         public override string ToString()
         {
-            return $"PassengersAirplane: {base.ToString()}, EnginesNum={enginesNum}, WingLength={wingLength}, Rows={rows}, Columns={columns}";
+            return $"PassengersAirplane: {base.ToString()}, EnginesNum={EnginesNum}, WingLength={WingLength}, Rows={Rows}, Columns={Columns}";
         }
     }
 }

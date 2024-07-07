@@ -63,7 +63,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam2
 
         public override string ToString()
         {
-            return $"{base.ToString()} + Bus: Doors={doors}, BellStop={bellStop}";
+            return $"{base.ToString()} => Bus: Doors={doors}, BellStop={bellStop}";
         }
     }
 }

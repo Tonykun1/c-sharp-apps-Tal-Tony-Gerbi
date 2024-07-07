@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam2
     public class MonitorTransportation
     {
 
-        public  void Test1()
+        public void Test1()
         {
             //TODO: 
 
@@ -187,7 +188,40 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam2
 
             }
             Console.WriteLine("\n*********************************\n");
+            Console.WriteLine("Function myTest and i did inside the function CountPlains");
+            MyTest();
+           
         }
+        public void MyTest()
+        {
+            PublicVehicle publicVehicle = new PublicVehicle(4, 100);
+            Bus bus = new Bus(2, 101, 40, 4, 3);
+            PassengersAirplain passengersAirplain = new PassengersAirplain(605, 987653, 4, 10, 60, 6);
 
+            Crone crone1 = new Crone(20, 5);
+            PassengersTrain passengersTrain = new PassengersTrain(65, 9998774, 250, crone1, 5);
+            PublicVehicle[] allfamily = { publicVehicle, bus, passengersAirplain, passengersTrain };
+
+            for (int i = 0; i < allfamily.Length; i++)
+            {
+                PublicVehicle duddy = allfamily[i];
+                duddy.UploadPassengers(5);
+                Console.WriteLine(duddy);
+            }
+            Console.WriteLine( CountPlains(allfamily));
+        }
+        public int CountPlains(PublicVehicle[] vehicles)
+        {
+            int count = 0;
+            for (int i = 0; i < vehicles.Length; i++)
+            {
+                if (vehicles[i] is PassengersAirplain)
+                {
+                    PassengersAirplain airplane = (PassengersAirplain)vehicles[i];
+                    count += airplane.Rows * airplane.Columns;
+                }
+            }
+            return count;
+        }
     }
 }
