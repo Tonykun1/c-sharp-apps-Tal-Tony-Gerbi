@@ -10,6 +10,8 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam2
     {
         private int rows, columns;
 
+        public int Rows { get => rows; set => rows = value; }
+        public int Columns { get => columns; set => columns = value; }
 
         public Crone(int rows, int columns)
         {

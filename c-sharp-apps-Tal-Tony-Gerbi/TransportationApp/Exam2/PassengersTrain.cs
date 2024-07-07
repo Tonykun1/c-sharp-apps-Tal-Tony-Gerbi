@@ -15,13 +15,13 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam2
         {
 
         }
-        public PassengersTrain(int line, int id, int maxSpeed, int seats, Crone[] crones, int cronesAmount) : base(line, id, maxSpeed, seats)
+        public PassengersTrain(int line, int id, int maxSpeed, Crone crone, int cronesAmount) : base(line, id, maxSpeed, 0)
         {
-            this.crones = crones;
+            this.crones = new Crone[cronesAmount];
             this.cronesAmount = cronesAmount;
             for (int i = 0; i < crones.Length; i++)
             {
-                Seats += crones[i].GetSeats();
+                crones[i] = new Crone(crone);
             }
         }
         public override int MaxSpeed
@@ -39,6 +39,9 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam2
                 }
             }
         }
+
+        public Crone[] Crones { get => crones; set => crones = value; }
+        public int CronesAmount { get => cronesAmount; set => cronesAmount = value; }
 
         public override bool CalculateHasRoom()
         {

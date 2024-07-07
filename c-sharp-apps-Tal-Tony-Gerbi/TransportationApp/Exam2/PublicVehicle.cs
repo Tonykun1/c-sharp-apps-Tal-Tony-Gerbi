@@ -56,6 +56,9 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam2
                 }
             }
         }
+
+        public int RejecetedPassengers { get => rejecetedPassengers; set => rejecetedPassengers = value; }
+
         public virtual bool CalculateHasRoom()
         {
             return (this.seats - this.currentPassengers) > 0;
@@ -77,7 +80,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam2
                 }
                 else
                 {
-                    this.rejecetedPassengers = (this.CurrentPassengers + passengers) - this.seats;
+                    this.RejecetedPassengers = (this.CurrentPassengers + passengers) - this.seats;
                     this.CurrentPassengers = this.seats;
                     hasRoom = false;
                 }
