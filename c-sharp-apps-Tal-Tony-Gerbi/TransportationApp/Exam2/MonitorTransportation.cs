@@ -9,7 +9,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam2
     public class MonitorTransportation
     {
 
-        public static void Test1()
+        public  void Test1()
         {
             //TODO: 
 
@@ -155,9 +155,6 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam2
                 allPassed = false;
 
             }
-
-
-            //Check that each crone is a different object...
 
 
             if (passengersTrain1.Crones[0].Equals(passengersTrain1.Crones[1]))

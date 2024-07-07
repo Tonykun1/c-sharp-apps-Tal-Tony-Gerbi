@@ -43,8 +43,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam2
         public int Line { get => line; set => line = value; }
         public int Id { get => id; set => id = value; }
         public int Seats { get => seats; set => seats = value; }
-
-
+        public int RejecetedPassengers { get => rejecetedPassengers; set => rejecetedPassengers = value; }
         public virtual int MaxSpeed
         {
             get => this.maxSpeed;
@@ -57,7 +56,6 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam2
             }
         }
 
-        public int RejecetedPassengers { get => rejecetedPassengers; set => rejecetedPassengers = value; }
 
         public virtual bool CalculateHasRoom()
         {
@@ -66,24 +64,25 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam2
         }
         public virtual void UploadPassengers(int passengers)
         {
-            if(CalculateHasRoom())
+            if (!CalculateHasRoom())
             {
-                Console.WriteLine("No Vehicle is full");
+                Console.WriteLine("No, the vehicle is full");
                 return;
             }
-            if(this.seats >= this.currentPassengers+passengers)
+
+            if (seats >= currentPassengers + passengers)
             {
-                this.currentPassengers += passengers;
-                if (this.currentPassengers == this.seats)
+                currentPassengers += passengers;
+                if (currentPassengers == seats)
                 {
-                    hasRoom = false;
+                    HasRoom = false;
                 }
-                else
-                {
-                    this.RejecetedPassengers = (this.CurrentPassengers + passengers) - this.seats;
-                    this.CurrentPassengers = this.seats;
-                    hasRoom = false;
-                }
+            }
+            else
+            {
+                rejecetedPassengers = (currentPassengers + passengers) - seats;
+                currentPassengers = seats;
+                HasRoom = false;
             }
         }
         public override string ToString()

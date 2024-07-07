@@ -12,16 +12,18 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam2
         private int wingLength;
         private int rows;
         private int columns;
+
         public PassengersAirplain() : base() { }
 
-        public PassengersAirplain(int line, int id, int enginesNum, int wingLength, int rows, int columns) : base(line, id, 0, rows * columns)
+        public PassengersAirplain(int line, int id, int enginesNum, int wingLength, int rows, int columns)
+            : base(line, id, 0, rows * columns - 7)
         {
             this.enginesNum = enginesNum;
             this.wingLength = wingLength;
             this.rows = rows;
             this.columns = columns;
-            Seats -= 7;
         }
+
         public override int MaxSpeed
         {
             get => this.maxSpeed;

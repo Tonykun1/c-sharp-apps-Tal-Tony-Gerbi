@@ -43,23 +43,24 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam2
         {
             if (CalculateHasRoom())
             {
-                if (Math.Round(Seats * 1.1) == CurrentPassengers + pass)
+                int maxPassengers = (int)Math.Round(Seats * 1.1);
+                int totalPassengers = CurrentPassengers + pass;
+
+                if (totalPassengers <= maxPassengers)
                 {
-                    HasRoom = false;
                     CurrentPassengers += pass;
+                    HasRoom = totalPassengers < maxPassengers;
+                    RejecetedPassengers = 0;
                 }
                 else
                 {
-                    Console.WriteLine((int)Math.Round(Seats * 1.1));
-                    Console.WriteLine((CurrentPassengers + pass));
-
-                    RejecetedPassengers = ((int)Math.Round(Seats * 1.1))- (CurrentPassengers + pass);
-                    
-                    CurrentPassengers += pass - RejecetedPassengers;
+                    RejecetedPassengers = totalPassengers - maxPassengers;
+                    CurrentPassengers = maxPassengers;
                     HasRoom = false;
                 }
             }
         }
+
         public override string ToString()
         {
             return $"{base.ToString()} + Bus: Doors={doors}, BellStop={bellStop}";
