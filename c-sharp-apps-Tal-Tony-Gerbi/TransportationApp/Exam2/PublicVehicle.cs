@@ -18,10 +18,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam2
 
         public PublicVehicle()
         {
-            this.line = 0;
-            this.id = 0;
-            this.maxSpeed = 0;
-            this.seats = 0;
+
         }
 
         public PublicVehicle(int line, int id)
@@ -34,11 +31,8 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam2
         {
             this.line = line;
             this.id = id;
-            this.seats = seats;
-            if(maxSpeed > 40)
-            this.maxSpeed = 40;
-            else 
-            this.maxSpeed = maxSpeed;
+            this.Seats = seats;
+            this.MaxSpeed = maxSpeed;
         }
 
         public bool HasRoom { get => hasRoom; set => hasRoom = value; }
@@ -48,21 +42,26 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam2
         public int Seats { get => seats; set => seats = value; }
 
 
-        public virtual void SetMaxSpeed(int maxSpeed)
+        public virtual int MaxSpeed
         {
-            if (this.maxSpeed <= 40)
+            get => this.maxSpeed;
+            set
             {
-                this.maxSpeed = maxSpeed;
-                return;
+                if (value <= 40)
+                {
+                    this.maxSpeed = value;
+                }
+                else { 
+                    this.maxSpeed=40;
+                }
             }
-             this.maxSpeed = 40;
         }
         public virtual bool CalculateHasRoom()
         {
             return (this.seats - this.currentPassengers) > 0;
             
         }
-        public virtual void oUploadPassengers(int passengers)
+        public virtual void UploadPassengers(int passengers)
         {
             if(CalculateHasRoom())
             {
@@ -73,17 +72,20 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam2
             {
                 this.currentPassengers += passengers;
                 if (this.currentPassengers == this.seats)
+                {
                     hasRoom = false;
+                }
                 else
                 {
-                    this.rejecetedPassengers = (this.CurrentPassengers+passengers)-this.seats;
+                    this.rejecetedPassengers = (this.CurrentPassengers + passengers) - this.seats;
+                    this.CurrentPassengers = this.seats;
                     hasRoom = false;
                 }
             }
         }
         public override string ToString()
         {
-            return $"";
+            return $"PublicVehicle: Line={Line}, Id={Id}, MaxSpeed={MaxSpeed}, CurrentPassengers={CurrentPassengers}, Seats={Seats}";
         }
     }
 }

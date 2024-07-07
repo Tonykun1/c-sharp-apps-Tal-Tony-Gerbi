@@ -12,7 +12,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp
         {
             Console.WriteLine();
             Console.WriteLine("Name of application is TransportationApp");
-            
+            MonitorTransportation.Test1();
         }
     }
 }

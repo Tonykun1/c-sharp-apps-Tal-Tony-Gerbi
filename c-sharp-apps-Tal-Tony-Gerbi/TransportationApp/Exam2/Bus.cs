@@ -19,15 +19,28 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam2
         {
             this.doors = 1;
         }
-        public override void SetMaxSpeed(int maxSpeed )
+        public override int MaxSpeed
         {
-            if (this.maxSpeed <= 120)
+            get => this.maxSpeed;
+            set
             {
-                this.maxSpeed = maxSpeed;
-                return;
+                if (value <= 120)
+                {
+                    this.maxSpeed = value;
+                }
+                else
+                {
+                    this.maxSpeed = 120;
+                }
             }
-            else
-                this.maxSpeed = 120;
+        }
+        public override bool CalculateHasRoom()
+        {
+            return (Math.Round(Seats * 1.1) - CurrentPassengers) > 0;
+        }
+        public override string ToString()
+        {
+            return $"Bus: {base.ToString()}, Doors={doors}, BellStop={bellStop}";
         }
     }
 }

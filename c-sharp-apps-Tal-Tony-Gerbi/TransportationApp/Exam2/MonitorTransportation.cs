@@ -8,17 +8,28 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam2
 {
     public class MonitorTransportation
     {
-        public  void Test1()
+        public static void Test1()
         {
-            //TODO: 
+            Bus bus = new Bus(1, 100, 1000, 40, 2);
+            PassengersTrain train = new PassengersTrain(2, 101, 299,0, new Crone[] { new Crone(10, 5), new Crone(10, 5) }, 2);
+            PassengersAirplain airplane = new PassengersAirplain(3, 102, 4, 50, 20, 6);
 
-            //10 tests:
+            bus.UploadPassengers(10);
+            bus.UploadPassengers(30);
+            bus.UploadPassengers(5);
 
-            //test max speed
+            train.UploadPassengers(50);
+            train.UploadPassengers(30);
+            train.UploadPassengers(10);
 
-            //test uplod some passenger and the currentPassengers after. 
+            airplane.UploadPassengers(100);
+            airplane.UploadPassengers(50);
+            airplane.UploadPassengers(20);
 
-            //cases that it's should be done. And not. 
+            Console.WriteLine(bus);
+            Console.WriteLine(train);
+            Console.WriteLine(airplane);
         }
+
     }
 }
