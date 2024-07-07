@@ -33,10 +33,6 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam2
                 {
                     this.maxSpeed = value;
                 }
-                else
-                {
-                    this.maxSpeed = 300;
-                }
             }
         }
 

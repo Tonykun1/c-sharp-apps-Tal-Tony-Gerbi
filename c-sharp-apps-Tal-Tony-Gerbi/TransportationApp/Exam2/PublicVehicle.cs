@@ -32,7 +32,10 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam2
             this.line = line;
             this.id = id;
             this.Seats = seats;
-            this.MaxSpeed = maxSpeed;
+            if (maxSpeed <= 40)
+                this.maxSpeed = maxSpeed;
+            else this.maxSpeed = 0;
+            
         }
 
         public bool HasRoom { get => hasRoom; set => hasRoom = value; }
@@ -50,9 +53,6 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam2
                 if (value <= 40)
                 {
                     this.maxSpeed = value;
-                }
-                else { 
-                    this.maxSpeed=40;
                 }
             }
         }
