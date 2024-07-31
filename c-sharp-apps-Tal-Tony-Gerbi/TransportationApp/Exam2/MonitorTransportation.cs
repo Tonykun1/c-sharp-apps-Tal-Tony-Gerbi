@@ -196,10 +196,11 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam2
         {
             PublicVehicle publicVehicle = new PublicVehicle(4, 100);
             Bus bus = new Bus(2, 101, 40, 4, 3);
-            PassengersAirplain passengersAirplain = new PassengersAirplain(605, 987653, 4, 10, 60, 6);
+            PassengersAirplain passengersAirplane = new PassengersAirplain(605, 987653, 4, 10, 60, 6);
+
             Crone crone1 = new Crone(20, 5);
             PassengersTrain passengersTrain = new PassengersTrain(65, 9998774, 250, crone1, 5);
-            PublicVehicle[] allfamily = { publicVehicle, bus, passengersAirplain, passengersTrain };
+            PublicVehicle[] allfamily = { publicVehicle, bus, passengersAirplane, passengersTrain };
 
             for (int i = 0; i < allfamily.Length; i++)
             {
@@ -217,8 +218,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam2
             {
                 if (vehicles[i] is PassengersAirplain)
                 {
-                    PassengersAirplain airplane = (PassengersAirplain)vehicles[i];
-                    count += airplane.Rows * airplane.Columns;
+                    count++;
                 }
             }
             return count;
