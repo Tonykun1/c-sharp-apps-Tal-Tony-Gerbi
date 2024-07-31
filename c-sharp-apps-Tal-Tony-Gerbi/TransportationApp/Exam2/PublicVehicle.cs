@@ -66,7 +66,6 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam2
         {
             if (!CalculateHasRoom())
             {
-                Console.WriteLine("No, the vehicle is full");
                 return;
             }
 
