@@ -29,14 +29,6 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
             this.currentLocation = currentLocation;
         }
 
-        public Item(int width, int length, int height, double weight, bool isFragile)
-        {
-            this.width = width;
-            this.length = length;
-            this.height = height;
-            this.weight = weight;
-            this.isFragile = isFragile;
-        }
 
         public void SetLocation(string location)
         {

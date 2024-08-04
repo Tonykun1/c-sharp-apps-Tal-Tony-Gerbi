@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
 {
-    abstract class StorageStructure:IContainable
+    public abstract class StorageStructure : IContainable
     {
         private string country;
         private string city;
@@ -19,32 +19,67 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
             this.adress = adress;
             this.numAdress = numAdress;
         }
-        public bool Load(IPortable item)
+        public  bool Load(IPortable item)
         {
             return true;
         }
-        public bool Load(List<IPortable> items)
+
+        public  bool Load(List<IPortable> items)
         {
             for (int i = 0; i < items.Count; i++)
             {
-                return false;
+                if (!Load(items[i]))
+                    return false;
             }
             return true;
         }
-        public bool UnLoad(IPortable item)
+
+        public  bool Unload(IPortable item)
         {
             return true;
         }
-        public bool Unload(List<IPortable> items)
+
+        public  bool Unload(List<IPortable> items)
         {
+            bool allRemoved = true;
             for (int i = 0; i < items.Count; i++)
             {
-                return true;
+                if (!Unload(items[i]))
+                    allRemoved = false;
             }
+            return allRemoved;
+        }
+
+        public bool IsHaveRoom()
+        {
+            return true;
+        }
+
+        public bool IsOverload()
+        {
             return false;
         }
 
-        public string GetPricingList()
+        public int GetMaxVolume()
+        {
+            return 1000;
+        }
+
+        public int GetMaxWeight()
+        {
+            return 1000;
+        }
+
+        public int GetCurrentVolume()
+        {
+            return 0;
+        }
+
+        public int GetCurrentWeight()
+        {
+            return 0;
+        }
+        public virtual string GetPricingList()
         {
             return "";
         }
