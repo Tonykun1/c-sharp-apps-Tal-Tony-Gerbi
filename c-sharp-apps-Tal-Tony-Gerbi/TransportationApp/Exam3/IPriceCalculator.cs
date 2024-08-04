@@ -12,6 +12,12 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
         private const double ShipRate = 20;
         private const double AirplaneRate = 50;
 
+        private double ratePerKm;
+
+        public IPriceCalculator(double ratePerKm)
+        {
+            this.ratePerKm = ratePerKm;
+        }
         public double CalculatePrice(IPortable item, int travelDistance)
         {
             int unitCount = CalculateUnitCount(item);
