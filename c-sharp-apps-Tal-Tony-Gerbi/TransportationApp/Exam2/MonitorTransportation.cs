@@ -192,7 +192,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam2
             MyTest();
            
         }
-        public void MyTest()
+        public  void MyTest()
         {
             PublicVehicle publicVehicle = new PublicVehicle(4, 100);
             Bus bus = new Bus(2, 101, 40, 4, 3);
@@ -208,7 +208,8 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam2
                 duddy.UploadPassengers(5);
                 Console.WriteLine(duddy);
             }
-            Console.WriteLine( CountPlains(allfamily));
+            Console.WriteLine("function CountPlains");
+            Console.WriteLine(CountPlains(allfamily));
         }
         public int CountPlains(PublicVehicle[] vehicles)
         {
