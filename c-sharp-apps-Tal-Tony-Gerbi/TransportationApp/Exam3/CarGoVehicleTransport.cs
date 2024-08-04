@@ -37,7 +37,6 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
         }
         public bool UnLoad(IPortable item)
         {
-
             return items.Remove(item);
         }
         public bool Unload(List<IPortable> items)

@@ -11,8 +11,13 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
         public double GetArea();
         //width, length, height 
         public int[] GetSize();
-        public int GetVolume();
-
-
+        public double GetVolume();
+        public double GetWeight();
+        public void PackageItem();
+        public bool IsPackaged();
+        public void UnPackage();
+        public bool IsFragile();
+        public string GetLocation();
+        public bool IsLoaded();
     }
 }
