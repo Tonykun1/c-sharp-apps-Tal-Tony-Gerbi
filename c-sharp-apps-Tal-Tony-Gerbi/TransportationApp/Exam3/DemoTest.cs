@@ -13,12 +13,14 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
             bool allPassed = true;
 
             // Setup
-            GeneralItem item1 = new GeneralItem(10, 10, 5, 50, false, "Warehouse A");
-            GeneralItem item2 = new GeneralItem(10, 10, 3, 30, true, "Warehouse B");
-            GeneralItem item3 = new GeneralItem(5, 5, 8, 20, false, "Warehouse C");
+            StorageStructure SS = new StorageStructure("Israel", "tel-aviv", "Ben Gurion", 12);
+            StorageStructure SS1 = new StorageStructure("Israel", "tel-aviv", "Ben Gurion", 22);
+            StorageStructure SS2 = new StorageStructure("Israel", "tel-aviv", "Ben Gurion", 32);
+            GeneralItem item1 = new GeneralItem(10, 10, 5, 50, false, SS);
+            GeneralItem item2 = new GeneralItem(10, 10, 3, 30, true, SS1);
+            GeneralItem item3 = new GeneralItem(5, 5, 8, 20, false, SS2);
             List<IPortable> items = new List<IPortable> { item1, item2, item3 };
 
-            // Test 1: Single item, train, non-fragile
             ShippingPriceCalculator trainCalculator = new ShippingPriceCalculator;
             double expectedPrice1 = ((item1.GetVolume() / 100) + item1.GetWeight()) * 100 * 5;
             double actualPrice1 = trainCalculator.CalculatePrice(item1, 100);
