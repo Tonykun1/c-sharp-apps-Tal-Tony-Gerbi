@@ -10,7 +10,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
     {
         private int watt;
         private int hdmiSlot;
-      public ElectricDevice(int watt,int hdmiSlot, int width, int  length, int height, double weight, bool isFragile,string currentLocation)
+      public ElectricDevice(int watt,int hdmiSlot, int width, int  length, int height, double weight, bool isFragile, StorageStructure currentLocation)
      : base(width, length, height, weight, isFragile, currentLocation)
         {
            this.watt=watt;

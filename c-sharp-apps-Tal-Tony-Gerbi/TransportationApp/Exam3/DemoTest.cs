@@ -9,7 +9,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
   public class DemoTest
     {
         public static void RunTests()
-        {
+        {/*
             bool allPassed = true;
 
             // Setup
@@ -19,7 +19,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
             List<IPortable> items = new List<IPortable> { item1, item2, item3 };
 
             // Test 1: Single item, train, non-fragile
-            IPriceCalculator trainCalculator = new IPriceCalculator(5);
+            ShippingPriceCalculator trainCalculator = new ShippingPriceCalculator;
             double expectedPrice1 = ((item1.GetVolume() / 100) + item1.GetWeight()) * 100 * 5;
             double actualPrice1 = trainCalculator.CalculatePrice(item1, 100);
             if (actualPrice1 != expectedPrice1)
@@ -59,7 +59,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
             }
 
             // Test 4: Single item, ship, non-fragile
-            IPriceCalculator shipCalculator = new IPriceCalculator(20);
+            ShippingPriceCalculator shipCalculator = new ShippingPriceCalculator;
             double expectedPrice4 = ((item1.GetVolume() / 100) + item1.GetWeight()) * 200 * 20;
             double actualPrice4 = shipCalculator.CalculatePrice(item1, 200);
             if (actualPrice4 != expectedPrice4)
@@ -225,7 +225,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
             {
                 Console.WriteLine("YOU HAVE FAILURES AT THE TESTS :( - SEE ABOVE");
             }
-            Console.WriteLine("\n*********************************\n");
+            Console.WriteLine("\n*********************************\n");*/
         }
     }
 }

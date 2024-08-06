@@ -9,14 +9,14 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
     public interface IPortable
     {
         public double GetArea();
-        public int[] GetSize();
+        public double[] GetSize();
         public double GetVolume();
         public double GetWeight();
         public void PackageItem();
         public bool IsPackaged();
         public void UnPackage();
         public bool IsFragile();
-        public string GetLocation();
+        public StorageStructure GetLocation();
         public bool IsLoaded();
     }
 }

@@ -8,7 +8,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
 {
     public  class GeneralItem:Item
     {
-        public GeneralItem( int width, int length, int height, double weight, bool isFragile, string currentLocation)
+        public GeneralItem( int width, int length, int height, double weight, bool isFragile, StorageStructure currentLocation)
 : base(width, length, height, weight, isFragile, currentLocation)
         {
 

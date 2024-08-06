@@ -9,7 +9,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
     abstract class Furniture : Item
     {
         private bool isModular;
-        public Furniture(bool isModular, int width, int length, int height, double weight, bool isFragile, string currentLocation)
+        public Furniture(bool isModular, int width, int length, int height, double weight, bool isFragile, StorageStructure currentLocation)
           : base(width, length, height, weight, isFragile, currentLocation)
         {
             this.isModular = isModular;

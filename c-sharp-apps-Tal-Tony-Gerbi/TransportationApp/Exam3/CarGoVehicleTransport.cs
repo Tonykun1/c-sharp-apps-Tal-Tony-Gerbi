@@ -20,7 +20,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
         private double price;
         private int id = new Random().Next(1000, 10000);
         private List<IPortable> items;
-        private IPriceCalculator iPriceCalculator;
+        private ShippingPriceCalculator ShippingPriceCalculator;
 
         public bool Load(IPortable item)
         {

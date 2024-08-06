@@ -15,9 +15,9 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
         private bool isFragile;
         private bool isPackaged;
         private bool isLoaded;
-        private string currentLocation;
+        private StorageStructure currentLocation;
 
-        public Item(int width, int length, int height, double weight, bool isFragile, string currentLocation)
+        public Item(int width, int length, int height, double weight, bool isFragile, StorageStructure currentLocation)
         {
             this.width = width;
             this.length = length;
@@ -30,7 +30,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
         }
 
 
-        public void SetLocation(string location)
+        public void SetLocation(StorageStructure location)
         {
             this.currentLocation = location;
         }
@@ -38,9 +38,9 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
         {
             return this.length*this.width;
         }
-        public int[] GetSize()
+        public double[] GetSize()
         {
-            return new int[] { this.width , this.length , this.height };
+            return new double[] { this.width , this.length , this.height };
         }
         public double GetVolume()
         {
@@ -64,13 +64,14 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
         {
             return isFragile;
         }
-        public string GetLocation()
-        {
-            return currentLocation;
-        }
         public bool IsLoaded()
         {
             return isLoaded;
+        }
+
+        StorageStructure IPortable.GetLocation()
+        {
+            return currentLocation;
         }
     }
 }
