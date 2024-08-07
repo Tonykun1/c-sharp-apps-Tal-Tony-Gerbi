@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Interfaces;
 
-namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
+namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
 {
-    public class Port:StorageStructure
+    public class Port : StorageStructure
     {
         private CargoType driverType;
 
@@ -15,11 +16,11 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
         {
             this.driverType = driverType;
         }
-        public  bool Load(IPortable item)
+        public bool Load(IPortable item)
         {
             return true;
         }
-        public  bool Load(List<IPortable> items)
+        public bool Load(List<IPortable> items)
         {
             for (int i = 0; i < items.Count; i++)
             {
@@ -27,11 +28,11 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
             }
             return true;
         }
-        public  bool UnLoad(IPortable item)
+        public bool UnLoad(IPortable item)
         {
             return true;
         }
-        public  bool Unload(List<IPortable> items)
+        public bool Unload(List<IPortable> items)
         {
             for (int i = 0; i < items.Count; i++)
             {
@@ -40,7 +41,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
             return false;
         }
 
-        public  override string GetPricingList()
+        public override string GetPricingList()
         {
             return "";
         }

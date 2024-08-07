@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
+namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Interfaces
 {
     public interface IShippingPriceCalculator
     {

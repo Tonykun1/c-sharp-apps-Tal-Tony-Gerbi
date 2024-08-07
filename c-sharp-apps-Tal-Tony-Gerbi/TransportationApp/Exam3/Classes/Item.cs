@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Interfaces;
 
-namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
+namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
 {
-    public class Item: IPortable
+    public class Item : IPortable
     {
         private int width;
         private int length;
@@ -24,33 +25,35 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
             this.height = height;
             this.weight = weight;
             this.isFragile = isFragile;
-            this.isPackaged = false;
-            this.isLoaded = false;
+            isPackaged = false;
+            isLoaded = false;
             this.currentLocation = currentLocation;
         }
 
 
         public void SetLocation(StorageStructure location)
         {
-            this.currentLocation = location;
+            currentLocation = location;
         }
         public double GetArea()
         {
-            return this.length*this.width;
+            return length * width;
         }
         public double[] GetSize()
         {
-            return new double[] { this.width , this.length , this.height };
+            return new double[] { width, length, height };
         }
         public double GetVolume()
         {
-            return this.width * this.length * this.height;
+            return width * length * height;
         }
-        public double GetWeight() {  
-            return this.weight; 
+        public double GetWeight()
+        {
+            return weight;
         }
-        public void PackageItem() { 
-            this.isPackaged = true;
+        public void PackageItem()
+        {
+            isPackaged = true;
         }
         public bool IsPackaged()
         {
@@ -58,7 +61,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
         }
         public void UnPackage()
         {
-            isPackaged=false;
+            isPackaged = false;
         }
         public bool IsFragile()
         {

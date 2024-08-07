@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes;
+using c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Interfaces;
 
-namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
+namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Abstracts
 {
-    public abstract class CarGoVehicleTransport: IContainable
+    public abstract class CarGoVehicleTransport : IContainable
     {
         private Driver driver;
         private int maximum_Weight;
@@ -20,7 +22,8 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
         private double price;
         private int id = new Random().Next(1000, 10000);
         private List<IPortable> items;
-        private ShippingPriceCalculator ShippingPriceCalculator;
+        private ShippingPriceCalculator shippingPriceCalculator;
+
 
         public bool Load(IPortable item)
         {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
+namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
 {
     public class Driver
     {
@@ -55,16 +55,16 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
         }
         public void SetType(CargoType type)
         {
-            this.driverType = type;
+            driverType = type;
         }
         public bool Approve(CargoType type, string nextDestination)
         {
-           bool driveAnswer=false;
+            bool driveAnswer = false;
             Console.WriteLine($"Driver {firstName}  {lastName} is ready to go? ");
             string answer = Console.ReadLine();
 
-            if (answer == "yes"||answer=="y"|| answer == "YES" || answer == "Y")
-                driveAnswer=true;
+            if (answer == "yes" || answer == "y" || answer == "YES" || answer == "Y")
+                driveAnswer = true;
             if (driveAnswer && type == driverType)
             {
                 Console.WriteLine($"Driver {firstName} {lastName} approves the vehicle for the next destination: {nextDestination}");
@@ -75,7 +75,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
                 Console.WriteLine($"Driver {firstName} {lastName} is not authorized to approve this type of vehicle.");
                 return false;
             }
-            
+
         }
     }
 }

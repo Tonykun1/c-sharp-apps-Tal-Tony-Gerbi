@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Interfaces;
 
-namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
+namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
 {
-    public abstract class StorageStructure : IContainable
+    public class StorageStructure : IContainable
     {
         private string country;
         private string city;
@@ -19,12 +20,12 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
             this.adress = adress;
             this.numAdress = numAdress;
         }
-        public  bool Load(IPortable item)
+        public bool Load(IPortable item)
         {
             return true;
         }
 
-        public  bool Load(List<IPortable> items)
+        public bool Load(List<IPortable> items)
         {
             for (int i = 0; i < items.Count; i++)
             {
@@ -34,12 +35,12 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
             return true;
         }
 
-        public  bool Unload(IPortable item)
+        public bool Unload(IPortable item)
         {
             return true;
         }
 
-        public  bool Unload(List<IPortable> items)
+        public bool Unload(List<IPortable> items)
         {
             bool allRemoved = true;
             for (int i = 0; i < items.Count; i++)
