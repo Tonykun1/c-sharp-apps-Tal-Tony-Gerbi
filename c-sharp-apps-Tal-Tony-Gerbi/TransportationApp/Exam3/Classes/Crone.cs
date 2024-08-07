@@ -3,63 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Interfaces;
 
 namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
 {
-    public class Train : IShippingPriceCalculator, IContainable
+    public class Crone : IContainable
     {
-        private const double RatePerKm = 5;
         private int maxVolume;
         private int maxWeight;
         private int currentVolume;
         private int currentWeight;
         private List<IPortable> items;
+        private int maxCapacity;
 
-        public Train(int maxVolume, int maxWeight)
+        public Crone(int maxVolume, int maxWeight, int maxCapacity)
         {
             this.maxVolume = maxVolume;
             this.maxWeight = maxWeight;
-            this.items = new List<IPortable>();
+            this.maxCapacity = maxCapacity;
             this.currentVolume = 0;
             this.currentWeight = 0;
-        }
-
-        public double CalculatePrice(IPortable item, int travelDistance)
-        {
-            int units = CalculateUnits(item);
-            return units * travelDistance * RatePerKm;
-        }
-
-        public double CalculatePrice(List<IPortable> items, int travelDistance)
-        {
-            int totalUnits = 0;
-            foreach (var item in items)
-            {
-                totalUnits += CalculateUnits(item);
-            }
-            return totalUnits * travelDistance * RatePerKm;
-        }
-
-        private int CalculateUnits(IPortable item)
-        {
-            int units = (int)(item.GetVolume() / 100) + (int)item.GetWeight();
-            if (item.IsFragile())
-            {
-                units *= 2;
-            }
-            return units;
+            this.items = new List<IPortable>();
         }
 
         public bool Load(IPortable item)
         {
-            int itemVolume = (int)item.GetVolume();
-            int itemWeight = (int)item.GetWeight();
-            if (IsHaveRoom(itemVolume, itemWeight) && !IsOverload(itemVolume, itemWeight))
+            if (IsHaveRoom() && !IsOverload())
             {
                 items.Add(item);
-                currentVolume += itemVolume;
-                currentWeight += itemWeight;
+                currentVolume += (int)item.GetVolume();
+                currentWeight += (int)item.GetWeight();
                 return true;
             }
             return false;
@@ -70,7 +42,9 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
             foreach (var item in items)
             {
                 if (!Load(item))
-                    return false;
+                {
+                    return false; 
+                }
             }
             return true;
         }
@@ -88,33 +62,24 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
 
         public bool Unload(List<IPortable> items)
         {
-            bool allRemoved = true;
             foreach (var item in items)
             {
                 if (!Unload(item))
-                    allRemoved = false;
+                {
+                    return false; 
+                }
             }
-            return allRemoved;
+            return true;
         }
 
         public bool IsHaveRoom()
         {
-            return currentVolume < maxVolume;
-        }
-
-        public bool IsHaveRoom(int itemVolume, int itemWeight)
-        {
-            return (currentVolume + itemVolume) <= maxVolume;
+            return items.Count < maxCapacity;
         }
 
         public bool IsOverload()
         {
-            return currentWeight > maxWeight;
-        }
-
-        public bool IsOverload(int itemVolume, int itemWeight)
-        {
-            return (currentWeight + itemWeight) > maxWeight;
+            return currentVolume > maxVolume || currentWeight > maxWeight;
         }
 
         public int GetMaxVolume()
@@ -139,8 +104,8 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
 
         public string GetPricingList()
         {
-            return "";
+            // Implement pricing logic if needed
+            return "Pricing information";
         }
     }
-
 }

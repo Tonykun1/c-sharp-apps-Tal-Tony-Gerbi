@@ -23,7 +23,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
             IPortable item3 = new GeneralItem(5, 5, 8, 20, false, SS3);
             List<IPortable> items = new List<IPortable> { item1, item2, item3 };
 
-            Train trainTransport = new Train();
+            Train trainTransport = new Train(100,101);
             Ship shipTransport = new Ship();
             Airplane airplaneTransport = new Airplane();
 
