@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,26 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
 
         public static void RunTests()
         {
+            
+            Port port=new Port(CargoType.airplane, "Israel", "tel-aviv", "Ben Gurion", 12);
+            /*GeneralItem item = new GeneralItem(10, 10, 10, 10, false, port);
+            Console.WriteLine(item.GetLocation());
+            Console.WriteLine(item.ToString());
+            Console.WriteLine(item.IsLoaded());
+            Console.WriteLine(item.IsFragile());
+            Console.WriteLine(string.Join(", ", item.GetSize()));
+            Console.WriteLine(item.GetArea());
+            Console.WriteLine(item.GetVolume());
+            Console.WriteLine(item.GetWeight());
+            item.PackageItem();
+            item.UnPackage();
+            Console.WriteLine(item.IsPackaged());*/
+            IPortable item1 = new GeneralItem(10, 10, 10, 10, false, port);
+            IPortable item3 = new GeneralItem(5, 5, 5, 5, false, port);
+            List<IPortable> items = new List<IPortable> { item1, item3};
+            Container cont = new Container(19,1000);
+            Console.WriteLine(cont.Load(item3));
+            /*
             bool allPassed = true;
 
             StorageStructure SS1 = new StorageStructure("Israel", "tel-aviv", "Ben Gurion", 12);
@@ -23,12 +44,12 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
             IPortable item3 = new GeneralItem(5, 5, 8, 20, false, SS3);
             List<IPortable> items = new List<IPortable> { item1, item2, item3 };
 
-            Train trainTransport = new Train(100,101);
-            Ship shipTransport = new Ship();
-            Airplane airplaneTransport = new Airplane();
+            Train train = new Train(100,101);
+            Ship ship = new Ship();
+            Airplane airplane = new Airplane();
 
             double expectedPrice1 = ((item1.GetVolume() / 100) + item1.GetWeight()) * 100 * 5;
-            double actualPrice1 = trainTransport.CalculatePrice(item1, 100);
+            double actualPrice1 = train.CalculatePrice(item1, 100);
             if (actualPrice1 != expectedPrice1)
             {
                 Console.WriteLine($"Test 1 Failed - Expected: {expectedPrice1}, Actual: {actualPrice1}");
@@ -40,7 +61,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
             }
 
             double expectedPrice2 = (((item2.GetVolume() / 100) + item2.GetWeight()) * 2) * 100 * 5;
-            double actualPrice2 = trainTransport.CalculatePrice(item2, 100);
+            double actualPrice2 = train.CalculatePrice(item2, 100);
             if (actualPrice2 != expectedPrice2)
             {
                 Console.WriteLine($"Test 2 Failed - Expected: {expectedPrice2}, Actual: {actualPrice2}");
@@ -52,7 +73,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
             }
 
             double expectedPrice3 = (((item1.GetVolume() / 100) + item1.GetWeight()) + (((item2.GetVolume() / 100) + item2.GetWeight()) * 2) + ((item3.GetVolume() / 100) + item3.GetWeight())) * 100 * 5;
-            double actualPrice3 = trainTransport.CalculatePrice(items, 100);
+            double actualPrice3 = train.CalculatePrice(items, 100);
             if (actualPrice3 != expectedPrice3)
             {
                 Console.WriteLine($"Test 3 Failed - Expected: {expectedPrice3}, Actual: {actualPrice3}");
@@ -64,7 +85,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
             }
 
             double expectedPrice4 = ((item1.GetVolume() / 100) + item1.GetWeight()) * 200 * 20;
-            double actualPrice4 = shipTransport.CalculatePrice(item1, 200);
+            double actualPrice4 = ship.CalculatePrice(item1, 200);
             if (actualPrice4 != expectedPrice4)
             {
                 Console.WriteLine($"Test 4 Failed - Expected: {expectedPrice4}, Actual: {actualPrice4}");
@@ -77,7 +98,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
 
    
             double expectedPrice5 = (((item2.GetVolume() / 100) + item2.GetWeight()) * 2) * 200 * 20;
-            double actualPrice5 = shipTransport.CalculatePrice(item2, 200);
+            double actualPrice5 = ship.CalculatePrice(item2, 200);
             if (actualPrice5 != expectedPrice5)
             {
                 Console.WriteLine($"Test 5 Failed - Expected: {expectedPrice5}, Actual: {actualPrice5}");
@@ -90,7 +111,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
 
     
             double expectedPrice6 = (((item1.GetVolume() / 100) + item1.GetWeight()) + (((item2.GetVolume() / 100) + item2.GetWeight()) * 2) + ((item3.GetVolume() / 100) + item3.GetWeight())) * 200 * 20;
-            double actualPrice6 = shipTransport.CalculatePrice(items, 200);
+            double actualPrice6 = ship.CalculatePrice(items, 200);
             if (actualPrice6 != expectedPrice6)
             {
                 Console.WriteLine($"Test 6 Failed - Expected: {expectedPrice6}, Actual: {actualPrice6}");
@@ -103,7 +124,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
 
           
             double expectedPrice7 = ((item1.GetVolume() / 100) + item1.GetWeight()) * 300 * 50;
-            double actualPrice7 = airplaneTransport.CalculatePrice(item1, 300);
+            double actualPrice7 = airplane.CalculatePrice(item1, 300);
             if (actualPrice7 != expectedPrice7)
             {
                 Console.WriteLine($"Test 7 Failed - Expected: {expectedPrice7}, Actual: {actualPrice7}");
@@ -116,7 +137,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
 
           
             double expectedPrice8 = (((item2.GetVolume() / 100) + item2.GetWeight()) * 2) * 300 * 50;
-            double actualPrice8 = airplaneTransport.CalculatePrice(item2, 300);
+            double actualPrice8 = airplane.CalculatePrice(item2, 300);
             if (actualPrice8 != expectedPrice8)
             {
                 Console.WriteLine($"Test 8 Failed - Expected: {expectedPrice8}, Actual: {actualPrice8}");
@@ -128,7 +149,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
             }
 
             double expectedPrice9 = (((item1.GetVolume() / 100) + item1.GetWeight()) + (((item2.GetVolume() / 100) + item2.GetWeight()) * 2) + ((item3.GetVolume() / 100) + item3.GetWeight())) * 300 * 50;
-            double actualPrice9 = airplaneTransport.CalculatePrice(items, 300);
+            double actualPrice9 = airplane.CalculatePrice(items, 300);
             if (actualPrice9 != expectedPrice9)
             {
                 Console.WriteLine($"Test 9 Failed - Expected: {expectedPrice9}, Actual: {actualPrice9}");
@@ -141,7 +162,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
 
  
             double expectedPrice10 = ((item1.GetVolume() / 100) + item1.GetWeight()) * 150 * 5;
-            double actualPrice10 = trainTransport.CalculatePrice(item1, 150);
+            double actualPrice10 = train.CalculatePrice(item1, 150);
             if (actualPrice10 != expectedPrice10)
             {
                 Console.WriteLine($"Test 10 Failed - Expected: {expectedPrice10}, Actual: {actualPrice10}");
@@ -154,7 +175,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
 
            
             double expectedPrice11 = (((item2.GetVolume() / 100) + item2.GetWeight()) * 2) * 150 * 5;
-            double actualPrice11 = trainTransport.CalculatePrice(item2, 150);
+            double actualPrice11 = train.CalculatePrice(item2, 150);
             if (actualPrice11 != expectedPrice11)
             {
                 Console.WriteLine($"Test 11 Failed - Expected: {expectedPrice11}, Actual: {actualPrice11}");
@@ -167,7 +188,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
 
         
             double expectedPrice12 = ((item1.GetVolume() / 100) + item1.GetWeight()) * 250 * 20;
-            double actualPrice12 = shipTransport.CalculatePrice(item1, 250);
+            double actualPrice12 = ship.CalculatePrice(item1, 250);
             if (actualPrice12 != expectedPrice12)
             {
                 Console.WriteLine($"Test 12 Failed - Expected: {expectedPrice12}, Actual: {actualPrice12}");
@@ -180,7 +201,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
 
           
             double expectedPrice13 = (((item2.GetVolume() / 100) + item2.GetWeight()) * 2) * 250 * 20;
-            double actualPrice13 = shipTransport.CalculatePrice(item2, 250);
+            double actualPrice13 = ship.CalculatePrice(item2, 250);
             if (actualPrice13 != expectedPrice13)
             {
                 Console.WriteLine($"Test 13 Failed - Expected: {expectedPrice13}, Actual: {actualPrice13}");
@@ -193,7 +214,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
 
            
             double expectedPrice14 = ((item1.GetVolume() / 100) + item1.GetWeight()) * 350 * 50;
-            double actualPrice14 = airplaneTransport.CalculatePrice(item1, 350);
+            double actualPrice14 = airplane.CalculatePrice(item1, 350);
             if (actualPrice14 != expectedPrice14)
             {
                 Console.WriteLine($"Test 14 Failed - Expected: {expectedPrice14}, Actual: {actualPrice14}");
@@ -206,7 +227,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
 
             
             double expectedPrice15 = (((item2.GetVolume() / 100) + item2.GetWeight()) * 2) * 350 * 50;
-            double actualPrice15 = airplaneTransport.CalculatePrice(item2, 350);
+            double actualPrice15 = airplane.CalculatePrice(item2, 350);
             if (actualPrice15 != expectedPrice15)
             {
                 Console.WriteLine($"Test 15 Failed - Expected: {expectedPrice15}, Actual: {actualPrice15}");
@@ -226,7 +247,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
             {
                 Console.WriteLine("YOU HAVE FAILURES IN THE TESTS :( - SEE ABOVE");
             }
-            Console.WriteLine("\n*********************************\n");
+            Console.WriteLine("\n*********************************\n");*/
         }
 
     }

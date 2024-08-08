@@ -28,7 +28,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
             }
             return true;
         }
-        public bool UnLoad(IPortable item)
+        public  bool UnLoad(IPortable item)
         {
             return true;
         }
@@ -44,6 +44,10 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
         public override string GetPricingList()
         {
             return "";
+        }
+        public override string ToString()
+        {
+            return $"{base.ToString()}";
         }
     }
 }

@@ -1,44 +1,23 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes;
-using c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Interfaces;
 
-namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Abstracts
+namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
 {
-    public abstract class CarGoVehicleTransport : IContainable
+    public class Container : IContainable
     {
-        private Driver driver;
-        private int maximum_Weight;
-        private int maximum_Volume;
-        private bool ready_To_Go;
-        private bool over_Weight;
-        private string current_Port;
-        private string next_Port;
-        private int next_Port_Distance;
-        private double price;
-        private int id ;
+        private int maximumWeight;
+        private int maximumVolume;
         private List<IPortable> items;
-        private ShippingPriceCalculator shippingPriceCalculator;
 
-        //public CarGoVehicleTransport(Driver driver, int maximum_Weight, int maximum_Volume, bool over_Weight, string current_Port, string next_Port, int next_Port_Distance, double price, int id, List<IPortable> items, ShippingPriceCalculator shippingPriceCalculator)
-        //{
-        //    this.driver = driver;
-        //    this.maximum_Weight = maximum_Weight;
-        //    this.maximum_Volume = maximum_Volume;
-        //    this.ready_To_Go = false;
-        //    this.over_Weight = false;
-        //    this.current_Port = current_Port;
-        //    this.next_Port = next_Port;
-        //    this.next_Port_Distance = next_Port_Distance;
-        //    this.price = price;
-        //    this.id = new Random().Next(1000, 10000);
-        //    this.items = items;
-        //    this.shippingPriceCalculator = shippingPriceCalculator;
-        //}
+        public Container(int maximumWeight, int maximumVolume)
+        {
+            this.items = new List<IPortable>();
+            this.maximumWeight = maximumWeight;
+            this.maximumVolume = maximumVolume;
+        }
 
         public bool Load(IPortable item)
         {
@@ -88,12 +67,12 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Abstracts
 
         public int GetMaxVolume()
         {
-            return maximum_Volume;
+            return maximumVolume;
         }
 
         public int GetMaxWeight()
         {
-            return maximum_Weight;
+            return maximumWeight;
         }
 
         public int GetCurrentVolume()
@@ -115,13 +94,10 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Abstracts
             }
             return currentWeight;
         }
-        public string GetPricingList()
+
+        public  string GetPricingList()
         {
             return "";
-        }
-        public override string ToString()
-        {
-            return $"maximum_Weight {maximum_Weight}";
         }
     }
 }

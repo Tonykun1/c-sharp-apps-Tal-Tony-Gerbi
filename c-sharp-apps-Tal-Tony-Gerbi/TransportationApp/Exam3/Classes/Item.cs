@@ -7,7 +7,7 @@ using c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Interfaces;
 
 namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
 {
-    public class Item : IPortable
+    public abstract class Item : IPortable
     {
         private int width;
         private int length;
@@ -25,8 +25,8 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
             this.height = height;
             this.weight = weight;
             this.isFragile = isFragile;
-            isPackaged = false;
-            isLoaded = false;
+            this.isPackaged = false;
+            this.isLoaded = false;
             this.currentLocation = currentLocation;
         }
 
@@ -41,7 +41,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
         }
         public double[] GetSize()
         {
-            return new double[] { width, length, height };
+            return new double[] { this.width, this.length, this.height };
         }
         public double GetVolume()
         {
@@ -75,6 +75,10 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
         public StorageStructure GetLocation()
         {
             return currentLocation;
+        }
+        public override string ToString()
+        {
+            return $"width = {width},length ={length},height = {height}, isFragile = {isFragile},isPackaged ={isPackaged},isLoaded ={isLoaded},currentLocation = {currentLocation} ";
         }
     }
 }

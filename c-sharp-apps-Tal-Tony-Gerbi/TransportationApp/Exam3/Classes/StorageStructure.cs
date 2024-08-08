@@ -7,20 +7,20 @@ using c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Interfaces;
 
 namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
 {
-    public class StorageStructure : IContainable
+    public abstract class StorageStructure : IContainable
     {
         private string country;
         private string city;
         private string adress;
         private int numAdress;
-        public StorageStructure(string country, string city, string adress, int numAdress)
+        public  StorageStructure(string country, string city, string adress, int numAdress)
         {
             this.country = country;
             this.city = city;
             this.adress = adress;
             this.numAdress = numAdress;
         }
-        public bool Load(IPortable item)
+        public  bool Load(IPortable item)
         {
             return true;
         }
@@ -83,6 +83,10 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
         public virtual string GetPricingList()
         {
             return "";
+        }
+        public override string ToString()
+        {
+            return $"country is {country} ";
         }
     }
 }
