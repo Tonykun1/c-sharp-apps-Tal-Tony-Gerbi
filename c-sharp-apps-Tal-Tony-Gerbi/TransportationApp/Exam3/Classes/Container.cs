@@ -8,22 +8,30 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
 {
     public class Container : IContainable
     {
-        private int maximumWeight;
-        private int maximumVolume;
+        private double maxVolume;
+        private double maxWeight;
+        private double currentVolume;
+        private double currentWeight;
         private List<IPortable> items;
 
-        public Container(int maximumWeight, int maximumVolume)
+        public Container(double maxVolume, double maxWeight)
         {
+            this.maxVolume = maxVolume;
+            this.maxWeight = maxWeight;
+            this.currentVolume = 0;
+            this.currentWeight = 0;
             this.items = new List<IPortable>();
-            this.maximumWeight = maximumWeight;
-            this.maximumVolume = maximumVolume;
         }
+
+
 
         public bool Load(IPortable item)
         {
             if (IsHaveRoom() && !IsOverload())
             {
                 items.Add(item);
+                currentVolume += item.GetVolume();
+                currentWeight += item.GetWeight();
                 return true;
             }
             return false;
@@ -34,70 +42,73 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
             for (int i = 0; i < items.Count; i++)
             {
                 if (!Load(items[i]))
+                {
                     return false;
+                }
             }
             return true;
         }
 
         public bool Unload(IPortable item)
         {
-            return items.Remove(item);
+            if (items.Remove(item))
+            {
+                currentVolume -= item.GetVolume();
+                currentWeight -= item.GetWeight();
+                return true;
+            }
+            return false;
         }
 
         public bool Unload(List<IPortable> items)
         {
-            bool allRemoved = true;
             for (int i = 0; i < items.Count; i++)
             {
                 if (!Unload(items[i]))
-                    allRemoved = false;
+                {
+                    return false;
+                }
             }
-            return allRemoved;
+            return true;
         }
 
         public bool IsHaveRoom()
         {
-            return GetCurrentVolume() < GetMaxVolume();
+            return ((currentVolume < maxVolume) && (currentWeight < maxWeight));
         }
 
         public bool IsOverload()
         {
-            return GetCurrentWeight() > GetMaxWeight();
+            return currentWeight > maxWeight;
         }
 
-        public int GetMaxVolume()
+        public double GetMaxVolume()
         {
-            return maximumVolume;
+            return maxVolume;
         }
 
-        public int GetMaxWeight()
+        public double GetMaxWeight()
         {
-            return maximumWeight;
+            return maxWeight;
         }
 
-        public int GetCurrentVolume()
+        public double GetCurrentVolume()
         {
-            int currentVolume = 0;
-            for (int i = 0; i < items.Count; i++)
-            {
-                currentVolume += (int)items[i].GetVolume();
-            }
             return currentVolume;
         }
 
-        public int GetCurrentWeight()
+        public double GetCurrentWeight()
         {
-            int currentWeight = 0;
-            for (int i = 0; i < items.Count; i++)
-            {
-                currentWeight += (int)items[i].GetWeight();
-            }
             return currentWeight;
         }
-
-        public  string GetPricingList()
+        public string GetPricingList()
         {
             return "";
         }
+        public List<IPortable> GetList()
+        {
+            return items;
+        }
+
     }
 }

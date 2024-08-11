@@ -8,18 +8,16 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
 {
     public class Crone : IContainable
     {
-        private int maxVolume;
-        private int maxWeight;
-        private int currentVolume;
-        private int currentWeight;
+        private double maxVolume;
+        private double maxWeight;
+        private double currentVolume;
+        private double currentWeight;
         private List<IPortable> items;
-        private int maxCapacity;
 
-        public Crone(int maxVolume, int maxWeight, int maxCapacity)
+        public Crone(double maxVolume, double maxWeight)
         {
             this.maxVolume = maxVolume;
             this.maxWeight = maxWeight;
-            this.maxCapacity = maxCapacity;
             this.currentVolume = 0;
             this.currentWeight = 0;
             this.items = new List<IPortable>();
@@ -30,8 +28,8 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
             if (IsHaveRoom() && !IsOverload())
             {
                 items.Add(item);
-                currentVolume += (int)item.GetVolume();
-                currentWeight += (int)item.GetWeight();
+                currentVolume += item.GetVolume();
+                currentWeight +=item.GetWeight();
                 return true;
             }
             return false;
@@ -39,9 +37,9 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
 
         public bool Load(List<IPortable> items)
         {
-            foreach (var item in items)
+           for(int i = 0; i<items.Count; i++)
             {
-                if (!Load(item))
+                if (!Load(items[i]))
                 {
                     return false; 
                 }
@@ -53,8 +51,8 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
         {
             if (items.Remove(item))
             {
-                currentVolume -= (int)item.GetVolume();
-                currentWeight -= (int)item.GetWeight();
+                currentVolume -= item.GetVolume();
+                currentWeight -= item.GetWeight();
                 return true;
             }
             return false;
@@ -62,9 +60,9 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
 
         public bool Unload(List<IPortable> items)
         {
-            foreach (var item in items)
+            for (int i = 0; i < items.Count; i++)
             {
-                if (!Unload(item))
+                if (!Unload(items[i]))
                 {
                     return false; 
                 }
@@ -74,38 +72,37 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
 
         public bool IsHaveRoom()
         {
-            return items.Count < maxCapacity;
+            return ((currentVolume<maxVolume)&&(currentWeight<maxWeight));
         }
 
         public bool IsOverload()
         {
-            return currentVolume > maxVolume || currentWeight > maxWeight;
+            return currentWeight > maxWeight;
         }
 
-        public int GetMaxVolume()
+        public double GetMaxVolume()
         {
             return maxVolume;
         }
 
-        public int GetMaxWeight()
+        public double GetMaxWeight()
         {
             return maxWeight;
         }
 
-        public int GetCurrentVolume()
+        public double GetCurrentVolume()
         {
             return currentVolume;
         }
 
-        public int GetCurrentWeight()
+        public double GetCurrentWeight()
         {
             return currentWeight;
         }
 
         public string GetPricingList()
         {
-            // Implement pricing logic if needed
-            return "Pricing information";
+            return "";
         }
     }
 }

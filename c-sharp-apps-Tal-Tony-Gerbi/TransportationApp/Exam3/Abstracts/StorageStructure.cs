@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Interfaces;
 
-namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
+namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Abstracts
 {
     public abstract class StorageStructure : IContainable
     {
@@ -13,14 +13,15 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
         private string city;
         private string adress;
         private int numAdress;
-        public  StorageStructure(string country, string city, string adress, int numAdress)
+
+        public StorageStructure(string country, string city, string adress, int numAdress)
         {
             this.country = country;
             this.city = city;
             this.adress = adress;
             this.numAdress = numAdress;
         }
-        public  bool Load(IPortable item)
+        public bool Load(IPortable item)
         {
             return true;
         }
@@ -61,22 +62,22 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
             return false;
         }
 
-        public int GetMaxVolume()
+        public double GetMaxVolume()
         {
             return 1000;
         }
 
-        public int GetMaxWeight()
+        public double GetMaxWeight()
         {
             return 1000;
         }
 
-        public int GetCurrentVolume()
+        public double GetCurrentVolume()
         {
             return 0;
         }
 
-        public int GetCurrentWeight()
+        public double GetCurrentWeight()
         {
             return 0;
         }
@@ -86,7 +87,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
         }
         public override string ToString()
         {
-            return $"country is {country} ";
+            return $"country is {country},city {city}, address {adress} addressNum {numAdress} ";
         }
     }
 }

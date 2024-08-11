@@ -117,22 +117,22 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
             return (currentWeight + itemWeight) > maxWeight;
         }
 
-        public int GetMaxVolume()
+        public double GetMaxVolume()
         {
             return maxVolume;
         }
 
-        public int GetMaxWeight()
+        public double GetMaxWeight()
         {
             return maxWeight;
         }
 
-        public int GetCurrentVolume()
+        public double GetCurrentVolume()
         {
             return currentVolume;
         }
 
-        public int GetCurrentWeight()
+        public double GetCurrentWeight()
         {
             return currentWeight;
         }

@@ -14,8 +14,8 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
 
         public static void RunTests()
         {
-            
-            Port port=new Port(CargoType.airplane, "Israel", "tel-aviv", "Ben Gurion", 12);
+
+
             /*GeneralItem item = new GeneralItem(10, 10, 10, 10, false, port);
             Console.WriteLine(item.GetLocation());
             Console.WriteLine(item.ToString());
@@ -28,11 +28,23 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
             item.PackageItem();
             item.UnPackage();
             Console.WriteLine(item.IsPackaged());*/
-            IPortable item1 = new GeneralItem(10, 10, 10, 10, false, port);
-            IPortable item3 = new GeneralItem(5, 5, 5, 5, false, port);
-            List<IPortable> items = new List<IPortable> { item1, item3};
-            Container cont = new Container(19,1000);
-            Console.WriteLine(cont.Load(item3));
+            Driver nick = new Driver("Nick", "haif", "1", CargoType.airplane);
+            Driver stephan = new Driver("stephan", "kosher", "2", CargoType.airplane);
+            Driver bobi = new Driver("bobi", "bonten", "1", CargoType.train);
+
+            Port port1 = new Port(CargoType.airplane, "Israel", "TLV", "Ben Gurion", 12);
+            Port port2 = new Port(CargoType.airplane, "Israel", "Eilat", "Ramon", 22);
+
+            Airplane LY466 = new Airplane(nick, 1400, 1100, "TLV", "Eilat", 150);
+            if(stephan.GetType()==CargoType.airplane)
+            {
+                Console.WriteLine("Test 1 Passed");
+            }
+            else
+            {
+                Console.WriteLine($"Test 1 fail  u have license {stephan.GetType()} and u need license to be on {CargoType.airplane}");
+            }
+
             /*
             bool allPassed = true;
 

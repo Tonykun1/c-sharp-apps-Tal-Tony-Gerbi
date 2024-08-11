@@ -15,10 +15,10 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
          public bool Unload(List<IPortable> items);
         public bool IsHaveRoom();
         public bool IsOverload();
-        public int GetMaxVolume();
-        public int GetMaxWeight();
-        public int GetCurrentVolume();
-        public int GetCurrentWeight();
+        public double GetMaxVolume();
+        public double GetMaxWeight();
+        public double GetCurrentVolume();
+        public double GetCurrentWeight();
         public string GetPricingList();
     }
 }

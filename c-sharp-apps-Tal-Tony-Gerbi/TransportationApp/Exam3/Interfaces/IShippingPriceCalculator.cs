@@ -8,7 +8,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Interfaces
 {
     public interface IShippingPriceCalculator
     {
-        double CalculatePrice(IPortable item, int travelDistance);
-        double CalculatePrice(List<IPortable> items, int travelDistance);
+        public  double CalculatePrice(IPortable item, int travelDistance);
+        public double CalculatePrice(List<IPortable> items, int travelDistance);
     }
 }

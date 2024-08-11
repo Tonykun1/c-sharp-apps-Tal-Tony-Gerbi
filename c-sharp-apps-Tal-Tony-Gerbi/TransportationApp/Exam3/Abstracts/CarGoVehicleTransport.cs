@@ -11,39 +11,37 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Abstracts
 {
     public abstract class CarGoVehicleTransport : IContainable
     {
-        private Driver driver;
-        private int maximum_Weight;
-        private int maximum_Volume;
+
+        protected Driver driver;
+        private double maximumWeight;
+        private double maximumVolume;
         private bool ready_To_Go;
         private bool over_Weight;
         private string current_Port;
         private string next_Port;
         private int next_Port_Distance;
         private double price;
-        private int id ;
+        private int id;
         private List<IPortable> items;
-        private ShippingPriceCalculator shippingPriceCalculator;
 
-        //public CarGoVehicleTransport(Driver driver, int maximum_Weight, int maximum_Volume, bool over_Weight, string current_Port, string next_Port, int next_Port_Distance, double price, int id, List<IPortable> items, ShippingPriceCalculator shippingPriceCalculator)
-        //{
-        //    this.driver = driver;
-        //    this.maximum_Weight = maximum_Weight;
-        //    this.maximum_Volume = maximum_Volume;
-        //    this.ready_To_Go = false;
-        //    this.over_Weight = false;
-        //    this.current_Port = current_Port;
-        //    this.next_Port = next_Port;
-        //    this.next_Port_Distance = next_Port_Distance;
-        //    this.price = price;
-        //    this.id = new Random().Next(1000, 10000);
-        //    this.items = items;
-        //    this.shippingPriceCalculator = shippingPriceCalculator;
-        //}
-
+        protected CarGoVehicleTransport(Driver driver, double maximumWeight, double maximumVolume, string current_Port, string next_Port, int next_Port_Distance)
+        {
+            this.id = new Random().Next(1000, 10000);
+            this.driver = driver;
+            this.maximumWeight = maximumWeight;
+            this.maximumVolume = maximumVolume;
+            this.ready_To_Go = false;
+            this.over_Weight = false;
+            this.current_Port = current_Port;
+            this.next_Port = next_Port;
+            this.next_Port_Distance = next_Port_Distance;
+            this.price = 0;
+        }
         public bool Load(IPortable item)
         {
             if (IsHaveRoom() && !IsOverload())
             {
+                //אופציה להוסיף הדפסה על הצלחת המטען
                 items.Add(item);
                 return true;
             }
@@ -52,6 +50,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Abstracts
 
         public bool Load(List<IPortable> items)
         {
+            //אופציה להוסיף הדפסה על הצלחת המטען
             for (int i = 0; i < items.Count; i++)
             {
                 if (!Load(items[i]))
@@ -86,17 +85,19 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Abstracts
             return GetCurrentWeight() > GetMaxWeight();
         }
 
-        public int GetMaxVolume()
+        public double GetMaxVolume()
         {
-            return maximum_Volume;
+            return maximumVolume;
         }
-
-        public int GetMaxWeight()
+        public double GetMaxWeight()
         {
-            return maximum_Weight;
+            return maximumWeight;
         }
-
-        public int GetCurrentVolume()
+        public int GetNextPortDistance()
+        {
+            return next_Port_Distance;
+        } 
+        public double GetCurrentVolume()
         {
             int currentVolume = 0;
             for (int i = 0; i < items.Count; i++)
@@ -105,8 +106,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Abstracts
             }
             return currentVolume;
         }
-
-        public int GetCurrentWeight()
+        public double GetCurrentWeight()
         {
             int currentWeight = 0;
             for (int i = 0; i < items.Count; i++)
@@ -119,9 +119,17 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Abstracts
         {
             return "";
         }
-        public override string ToString()
+        public void PrintItems()
         {
-            return $"maximum_Weight {maximum_Weight}";
+            for (int i = 0; i < items.Count; i++)
+            {
+                Console.WriteLine(items[i]);
+            }
+
+        }
+        public virtual string ToString()
+        {
+            return $"maximum_Weight {maximumWeight}, items  ";
         }
     }
 }

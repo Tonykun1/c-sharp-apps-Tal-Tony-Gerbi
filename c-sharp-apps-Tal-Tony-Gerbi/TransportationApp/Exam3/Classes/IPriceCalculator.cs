@@ -7,13 +7,17 @@ using c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Interfaces;
 
 namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
 {
-    public class ShippingPriceCalculator : IShippingPriceCalculator
+    public class IPriceCalculator : IShippingPriceCalculator
     {
-        private double ratePerKm;
+        private CargoType type;
+        private double price;
+        private IPortable item;
 
-        public ShippingPriceCalculator(double ratePerKm)
+        public IPriceCalculator(CargoType type, double price, IPortable item)
         {
-            this.ratePerKm = ratePerKm;
+            this.type = type;
+            this.price = price;
+            this.item = item;
         }
 
         public double CalculatePrice(IPortable item, int travelDistance)
@@ -23,7 +27,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
             {
                 units *= 2;
             }
-            return units * travelDistance * ratePerKm;
+            return units * travelDistance *price;
         }
 
         public double CalculatePrice(List<IPortable> items, int travelDistance)
@@ -38,7 +42,8 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
                 }
                 totalUnits += units;
             }
-            return totalUnits * travelDistance * ratePerKm;
+            return totalUnits * travelDistance * price;
         }
     }
 }
+
