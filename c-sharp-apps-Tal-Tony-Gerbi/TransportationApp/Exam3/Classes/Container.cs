@@ -1,4 +1,5 @@
-﻿using System;
+﻿using c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Abstracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,17 +24,33 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
             this.items = new List<IPortable>();
         }
 
-
+        public List<IPortable> GetItem()
+        {
+            return items;
+        }
 
         public bool Load(IPortable item)
         {
             if (IsHaveRoom() && !IsOverload())
             {
+                item.PackageItem();
+                item. LoadedItem();
                 items.Add(item);
+                Console.WriteLine("-------------------------------");
+                Console.WriteLine($"item: {item.GetID()}  added seccufully to container \ntotal item  in container is {items.Count}");
                 currentVolume += item.GetVolume();
                 currentWeight += item.GetWeight();
+                Console.WriteLine(item);
+                Console.WriteLine("-------------------------------");
                 return true;
             }
+            else
+            {
+                Console.WriteLine("-------------------------------");
+                Console.WriteLine("no space in container");
+                Console.WriteLine("-------------------------------");
+            }
+            
             return false;
         }
 
@@ -41,11 +58,16 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
         {
             for (int i = 0; i < items.Count; i++)
             {
+
                 if (!Load(items[i]))
                 {
+                    Console.WriteLine("total volume in container: " + currentVolume);
+                    Console.WriteLine($"Number of items in cargo: {this.items.Count}");
                     return false;
                 }
             }
+            Console.WriteLine("total volume in container: " + currentVolume);
+            Console.WriteLine($"Number of items in cargo: {this.items.Count}");
             return true;
         }
 
@@ -109,6 +131,13 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
         {
             return items;
         }
-
+        public void  ShowContainerList()
+        {
+            for (int i = 0; i < items.Count; i++)
+            {
+                Console.WriteLine(items[i]);
+            }
+  
+        }
     }
 }

@@ -19,29 +19,76 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
         }
         public bool Load(IPortable item)
         {
-            return true;
+            if (IsHaveRoom() && !IsOverload())
+            {
+                items.Add(item);
+                return true;
+            }
+            return false;
         }
+
         public bool Load(List<IPortable> items)
         {
             for (int i = 0; i < items.Count; i++)
             {
-                return false;
+                if (!Load(items[i]))
+                {
+                    return false;
+                }
             }
             return true;
         }
-        public  bool UnLoad(IPortable item)
+
+        public bool Unload(IPortable item)
         {
-            return true;
-        }
-        public bool Unload(List<IPortable> items)
-        {
-            for (int i = 0; i < items.Count; i++)
+            if (items.Remove(item))
             {
                 return true;
             }
             return false;
         }
 
+        public bool Unload(List<IPortable> items)
+        {
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (!Unload(items[i]))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public bool IsHaveRoom()
+        {
+            return ((base.GetCurrentVolume() < base.GetMaxVolume()) && (base.GetCurrentWeight() < base.GetMaxWeight()));
+        }
+
+        public bool IsOverload()
+        {
+            return base.GetCurrentWeight() > base.GetMaxWeight();
+        }
+
+        public double GetMaxVolume()
+        {
+            return base.GetMaxVolume();
+        }
+
+        public double GetMaxWeight()
+        {
+            return base.GetMaxWeight();
+        }
+
+        public double GetCurrentVolume()
+        {
+            return base.GetCurrentVolume();
+        }
+
+        public double GetCurrentWeight()
+        {
+            return base.GetCurrentWeight();
+        }
         public override string GetPricingList()
         {
             return "";

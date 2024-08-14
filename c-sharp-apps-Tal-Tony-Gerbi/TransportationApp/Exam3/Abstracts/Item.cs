@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Abstracts;
 using c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Interfaces;
 
-namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
+namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Abstracts
 {
     public abstract class Item : IPortable
     {
@@ -18,6 +17,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
         private bool isPackaged;
         private bool isLoaded;
         private StorageStructure currentLocation;
+        protected int id;
 
         public Item(int width, int length, int height, double weight, bool isFragile, StorageStructure currentLocation)
         {
@@ -29,9 +29,13 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
             this.isPackaged = false;
             this.isLoaded = false;
             this.currentLocation = currentLocation;
+            this.id = new Random().Next(1000,10000);
         }
 
-
+        public int GetID()
+        {
+                return id;
+        }
         public void SetLocation(StorageStructure location)
         {
             currentLocation = location;
@@ -42,7 +46,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
         }
         public double[] GetSize()
         {
-            return new double[] { this.width, this.length, this.height };
+            return new double[] { width, length, height };
         }
         public double GetVolume()
         {
@@ -72,14 +76,17 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
         {
             return isLoaded;
         }
-
+        public void LoadedItem()
+        {
+            isLoaded = true;
+        }
         public StorageStructure GetLocation()
         {
             return currentLocation;
         }
         public override string ToString()
         {
-            return $"width = {width},length ={length},height = {height}, isFragile = {isFragile},isPackaged ={isPackaged},isLoaded ={isLoaded},currentLocation = {currentLocation} ";
+            return $"volume {GetVolume()} | isFragile = {isFragile} | isPackaged ={isPackaged} | isLoaded ={isLoaded} | currentLocation = {currentLocation.GetCity()}";
         }
     }
 }

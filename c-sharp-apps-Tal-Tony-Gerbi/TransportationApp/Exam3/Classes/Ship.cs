@@ -8,17 +8,19 @@ using c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Abstracts;
 using System.ComponentModel.DataAnnotations;
 namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
 {
-    public class Ship :CarGoVehicleTransport, IShippingPriceCalculator
+    public class Ship : CarGoVehicleTransport, IShippingPriceCalculator
     {
         private const double RatePerKm = 20;
         private List<Container> container;
         private double currentVolume;
         private double currentWeight;
-        public Ship(Driver driver, double maximumWeight, double maximumVolume, string current_Port, string next_Port, int next_Port_Distance) : base(driver, maximumWeight, maximumVolume, current_Port, next_Port, next_Port_Distance)
+
+        public Ship(Driver driver, double maximumWeight, double maximumVolume, StorageStructure current_Port, StorageStructure next_Port, int next_Port_Distance) : base(driver, maximumWeight, maximumVolume, current_Port, next_Port, next_Port_Distance)
         {
-            container =null;
+            container = new List<Container>();
             this.currentVolume = 0;
             this.currentWeight = 0;
+            this.cargoType = CargoType.Ship;
         }
         public double CalculatePrice(IPortable item, int travelDistance)
         {
@@ -34,12 +36,35 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
             }
             return totalUnits * travelDistance * RatePerKm;
         }
-        public void addContainer()
+        public void AddContainer(Container newcontainer)
         {
-            for (int i = 0;i < container.Count;i++)
+            if (currentVolume + newcontainer.GetCurrentVolume() <= GetMaxVolume())
             {
-                if(currentWeight>GetMaxWeight())
-                 container.Add(container[i]);
+                this.container.Add(newcontainer);
+                currentVolume += newcontainer.GetCurrentVolume();
+                currentWeight += newcontainer.GetCurrentWeight();
+                Console.WriteLine("New Contanier added successfully!");
+                if (IsOverload() && !GetOverWeight())
+                {
+                    SetOverWeight(true);
+                    SetReadyToGo(false);
+                    Console.WriteLine("OVERWIGHT WARRNING!");
+                }
+            }
+            else
+                Console.WriteLine("Not enough volume to add the container");
+        }
+        public void RemoveContainer(Container newcontainer)
+        {
+            this.container.Remove(newcontainer);
+            currentVolume -= newcontainer.GetCurrentVolume();
+            currentWeight -= newcontainer.GetCurrentWeight();
+            Console.WriteLine("New Contanier remove successfully!");
+            if (currentWeight <GetMaxWeight())
+            {
+                SetOverWeight(false);
+                SetReadyToGo(true);
+                Console.WriteLine("overweight removed and ready to sail!");
             }
         }
         public int CalculateUnits(IPortable item)

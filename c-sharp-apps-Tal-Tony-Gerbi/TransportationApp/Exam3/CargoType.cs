@@ -8,11 +8,12 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
 {
    public enum CargoType
     {
-        motorcycle,
-        truck,
-        airplane,
-        train, 
-        ship,
-        car
+        Motorcycle,
+        Truck,
+        Airplane,
+        Train, 
+        Ship,
+        Car,
+        NULL
     }
 }

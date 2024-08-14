@@ -21,6 +21,10 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Abstracts
             this.adress = adress;
             this.numAdress = numAdress;
         }
+        public string GetCity()
+        {
+            return city;
+        }
         public bool Load(IPortable item)
         {
             return true;

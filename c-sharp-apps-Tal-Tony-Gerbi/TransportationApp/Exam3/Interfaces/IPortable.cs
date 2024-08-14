@@ -9,6 +9,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
 {
     public interface IPortable
     {
+        public int GetID();
         public double GetArea();
         public double[] GetSize();
         public double GetVolume();
@@ -19,5 +20,6 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
         public bool IsFragile();
         public StorageStructure GetLocation();
         public bool IsLoaded();
+        public void LoadedItem();
     }
 }

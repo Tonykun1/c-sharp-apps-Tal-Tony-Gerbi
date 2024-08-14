@@ -12,19 +12,20 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Abstracts
     public abstract class CarGoVehicleTransport : IContainable
     {
 
-        protected Driver driver;
+        private Driver driver;
         private double maximumWeight;
         private double maximumVolume;
         private bool ready_To_Go;
         private bool over_Weight;
-        private string current_Port;
-        private string next_Port;
+        private StorageStructure current_Port;
+        private StorageStructure next_Port;
         private int next_Port_Distance;
         private double price;
         private int id;
         private List<IPortable> items;
+        protected CargoType cargoType;
 
-        protected CarGoVehicleTransport(Driver driver, double maximumWeight, double maximumVolume, string current_Port, string next_Port, int next_Port_Distance)
+        public CarGoVehicleTransport(Driver driver, double maximumWeight, double maximumVolume, StorageStructure current_Port, StorageStructure next_Port, int next_Port_Distance)
         {
             this.id = new Random().Next(1000, 10000);
             this.driver = driver;
@@ -36,34 +37,85 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Abstracts
             this.next_Port = next_Port;
             this.next_Port_Distance = next_Port_Distance;
             this.price = 0;
+            this.cargoType = CargoType.NULL;
+            this.items = new List<IPortable>();
+
+        }
+        public void SetDriver(Driver driver)
+        { 
+            this.driver = driver; 
         }
         public bool Load(IPortable item)
         {
             if (IsHaveRoom() && !IsOverload())
             {
-                //אופציה להוסיף הדפסה על הצלחת המטען
                 items.Add(item);
+                Console.WriteLine("seccufully");
                 return true;
+            }
+            else
+            {
+                Console.WriteLine("no space");
             }
             return false;
         }
-
+        public List<IPortable> GetListItem()
+        {
+            return items;
+        }
         public bool Load(List<IPortable> items)
         {
-            //אופציה להוסיף הדפסה על הצלחת המטען
+
             for (int i = 0; i < items.Count; i++)
             {
                 if (!Load(items[i]))
+                {
                     return false;
+                }
             }
             return true;
         }
-
+        public bool GetOverWeight()
+        {
+            return over_Weight;
+        }
+        public void SetReadyToGo(bool readyToGo)
+        {
+            this.ready_To_Go= readyToGo;
+        }
+        public bool GetReadyToGo()
+        {
+            return this.ready_To_Go;
+        }
+        public void SetOverWeight(bool overWeight)
+        {
+            this.over_Weight = overWeight;
+        }
         public bool Unload(IPortable item)
         {
             return items.Remove(item);
         }
-
+        public  void ReadyToGo()
+        {
+           
+            if (driver.Approve(cargoType, next_Port) && !GetOverWeight())
+            {
+                ready_To_Go = true;
+                Console.WriteLine($"{cargoType} Ready To Go!");
+            }
+            else
+            {
+                ready_To_Go = false;
+                if (GetOverWeight())
+                {
+                    Console.WriteLine("Can't Approve You are Over Weight!");
+                }
+                else
+                {
+                    Console.WriteLine("Driver Didn't Approve!");
+                }
+            }
+        }
         public bool Unload(List<IPortable> items)
         {
             bool allRemoved = true;
@@ -84,7 +136,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Abstracts
         {
             return GetCurrentWeight() > GetMaxWeight();
         }
-
+       
         public double GetMaxVolume()
         {
             return maximumVolume;
@@ -96,36 +148,29 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Abstracts
         public int GetNextPortDistance()
         {
             return next_Port_Distance;
-        } 
+        }
         public double GetCurrentVolume()
         {
-            int currentVolume = 0;
+            double currentVolume = 0; 
             for (int i = 0; i < items.Count; i++)
             {
-                currentVolume += (int)items[i].GetVolume();
+                currentVolume += items[i].GetVolume(); 
             }
             return currentVolume;
         }
+
         public double GetCurrentWeight()
         {
-            int currentWeight = 0;
+            double currentWeight = 0; 
             for (int i = 0; i < items.Count; i++)
             {
-                currentWeight += (int)items[i].GetWeight();
+                currentWeight += items[i].GetWeight(); 
             }
             return currentWeight;
         }
-        public string GetPricingList()
+        public virtual string GetPricingList()
         {
             return "";
-        }
-        public void PrintItems()
-        {
-            for (int i = 0; i < items.Count; i++)
-            {
-                Console.WriteLine(items[i]);
-            }
-
         }
         public virtual string ToString()
         {

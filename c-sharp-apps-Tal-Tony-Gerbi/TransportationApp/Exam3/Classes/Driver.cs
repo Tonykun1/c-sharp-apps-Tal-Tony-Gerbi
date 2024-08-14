@@ -1,4 +1,5 @@
-﻿using System;
+﻿using c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Abstracts;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -57,7 +58,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
         {
             driverType = type;
         }
-        public bool Approve(CargoType type, string nextDestination)
+        public bool Approve(CargoType type, StorageStructure nextDestination)
         {
             bool driveAnswer = false;
             Console.WriteLine($"Driver {firstName}  {lastName} is ready to go? ");
@@ -72,8 +73,16 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
             }
             else
             {
-                Console.WriteLine($"Driver {firstName} {lastName} is not authorized to approve this type of vehicle.");
+                if (!driveAnswer && type == driverType)
+                {
+                    Console.WriteLine($"Driver {firstName} {lastName} u cant go cuz u dont ready to go yet ");
+                }
+                else if(driveAnswer && !(type == driverType))
+                {
+                    Console.WriteLine($"Driver {firstName} {lastName} cant go cuz he dont have appropriate license ");
+                }
                 return false;
+
             }
 
         }

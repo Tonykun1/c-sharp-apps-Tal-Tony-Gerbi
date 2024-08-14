@@ -1,28 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Abstracts;
 using c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Interfaces;
 
 namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
 {
-    public class Train : IShippingPriceCalculator, IContainable
+    public class Train : CarGoVehicleTransport, IShippingPriceCalculator
     {
         private const double RatePerKm = 5;
-        private int maxVolume;
-        private int maxWeight;
-        private int currentVolume;
-        private int currentWeight;
-        private List<IPortable> items;
+        private List<Crone> crones;
+        private double currentVolume;
+        private double currentWeight;
 
-        public Train(int maxVolume, int maxWeight)
+        public Train(Driver driver, double maximumWeight, double maximumVolume, StorageStructure current_Port, StorageStructure next_Port, int next_Port_Distance, int numberOfCrones)
+            : base(driver, maximumWeight, maximumVolume, current_Port, next_Port, next_Port_Distance)
         {
-            this.maxVolume = maxVolume;
-            this.maxWeight = maxWeight;
-            this.items = new List<IPortable>();
-            this.currentVolume = 0;
-            this.currentWeight = 0;
+            crones = new List<Crone>();
+            for (int i = 0; i < numberOfCrones; i++)
+            {
+                crones.Add(new Crone(maximumVolume / numberOfCrones, maximumWeight / numberOfCrones));
+            }
+            currentVolume = 0;
+            currentWeight = 0;
+            this.cargoType = CargoType.Train;
         }
 
         public double CalculatePrice(IPortable item, int travelDistance)
@@ -34,14 +38,47 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
         public double CalculatePrice(List<IPortable> items, int travelDistance)
         {
             int totalUnits = 0;
-            foreach (var item in items)
+            for (int i = 0; i < items.Count; i++)
             {
-                totalUnits += CalculateUnits(item);
+                totalUnits += CalculateUnits(items[i]);
             }
             return totalUnits * travelDistance * RatePerKm;
         }
 
-        private int CalculateUnits(IPortable item)
+        public void AddToCrone(IPortable item)
+        {
+            foreach (var crone in crones)
+            {
+                if (crone.Load(item))
+                {
+                    currentVolume += item.GetVolume();
+                    currentWeight += item.GetWeight();
+                    Console.WriteLine("Item added to a Crone successfully!");
+                    if (IsOverload() && !GetOverWeight())
+                    {
+                        SetOverWeight(true);
+                        Console.WriteLine("The train is now overloaded.");
+                    }
+                    return;
+                }
+            }
+            Console.WriteLine("No Crone has enough room for this item.");
+        }
+
+        public void AddToCrone(List<IPortable> items)
+        {
+            foreach (var item in items)
+            {
+                AddToCrone(item);
+            }
+        }
+
+        public List<Crone> GetCrones()
+        {
+            return crones;
+        }
+
+        public int CalculateUnits(IPortable item)
         {
             int units = (int)(item.GetVolume() / 100) + (int)item.GetWeight();
             if (item.IsFragile())
@@ -50,97 +87,5 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
             }
             return units;
         }
-
-        public bool Load(IPortable item)
-        {
-            int itemVolume = (int)item.GetVolume();
-            int itemWeight = (int)item.GetWeight();
-            if (IsHaveRoom(itemVolume, itemWeight) && !IsOverload(itemVolume, itemWeight))
-            {
-                items.Add(item);
-                currentVolume += itemVolume;
-                currentWeight += itemWeight;
-                return true;
-            }
-            return false;
-        }
-
-        public bool Load(List<IPortable> items)
-        {
-            foreach (var item in items)
-            {
-                if (!Load(item))
-                    return false;
-            }
-            return true;
-        }
-
-        public bool Unload(IPortable item)
-        {
-            if (items.Remove(item))
-            {
-                currentVolume -= (int)item.GetVolume();
-                currentWeight -= (int)item.GetWeight();
-                return true;
-            }
-            return false;
-        }
-
-        public bool Unload(List<IPortable> items)
-        {
-            bool allRemoved = true;
-            foreach (var item in items)
-            {
-                if (!Unload(item))
-                    allRemoved = false;
-            }
-            return allRemoved;
-        }
-
-        public bool IsHaveRoom()
-        {
-            return currentVolume < maxVolume;
-        }
-
-        public bool IsHaveRoom(int itemVolume, int itemWeight)
-        {
-            return (currentVolume + itemVolume) <= maxVolume;
-        }
-
-        public bool IsOverload()
-        {
-            return currentWeight > maxWeight;
-        }
-
-        public bool IsOverload(int itemVolume, int itemWeight)
-        {
-            return (currentWeight + itemWeight) > maxWeight;
-        }
-
-        public double GetMaxVolume()
-        {
-            return maxVolume;
-        }
-
-        public double GetMaxWeight()
-        {
-            return maxWeight;
-        }
-
-        public double GetCurrentVolume()
-        {
-            return currentVolume;
-        }
-
-        public double GetCurrentWeight()
-        {
-            return currentWeight;
-        }
-
-        public string GetPricingList()
-        {
-            return "";
-        }
     }
-
 }

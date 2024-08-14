@@ -20,5 +20,6 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
         public double GetCurrentVolume();
         public double GetCurrentWeight();
         public string GetPricingList();
+
     }
 }
