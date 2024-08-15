@@ -82,9 +82,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
                     Console.WriteLine($"Driver {firstName} {lastName} cant go cuz he dont have appropriate license ");
                 }
                 return false;
-
             }
-
         }
     }
 }

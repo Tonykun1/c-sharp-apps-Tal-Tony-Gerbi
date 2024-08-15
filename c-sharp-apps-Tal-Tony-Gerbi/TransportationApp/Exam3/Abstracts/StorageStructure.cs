@@ -91,7 +91,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Abstracts
         }
         public override string ToString()
         {
-            return $"country is {country},city {city}, address {adress} addressNum {numAdress} ";
+            return $"country is {country},city {city}, address {adress} numAddress {numAdress} ";
         }
     }
 }

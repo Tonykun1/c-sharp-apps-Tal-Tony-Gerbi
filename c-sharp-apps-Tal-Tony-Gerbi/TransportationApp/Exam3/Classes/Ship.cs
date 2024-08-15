@@ -54,13 +54,36 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
             else
                 Console.WriteLine("Not enough volume to add the container");
         }
+        public void DisplayContainers()
+        {
+            for (int i = 0; i < container.Count; i++)
+            {
+                Console.WriteLine($"Container : {i + 1}");
+                container[i].ShowContainerList();
+                Console.WriteLine("-------------------------------------------------------");
+            }
+        }
         public void RemoveContainer(Container newcontainer)
         {
             this.container.Remove(newcontainer);
             currentVolume -= newcontainer.GetCurrentVolume();
             currentWeight -= newcontainer.GetCurrentWeight();
-            Console.WriteLine("New Contanier remove successfully!");
-            if (currentWeight <GetMaxWeight())
+            Console.WriteLine("Contanier remove successfully!");
+            if (currentWeight < GetMaxWeight())
+            {
+                SetOverWeight(false);
+                SetReadyToGo(true);
+                Console.WriteLine("overweight removed and ready to sail!");
+            }
+        }
+        public void RemoveAtContainer(int index)
+        {
+            Container newcontainer = this.container[index];
+            this.container.RemoveAt(index);
+            currentVolume -= newcontainer.GetCurrentVolume();
+            currentWeight -= newcontainer.GetCurrentWeight();
+            Console.WriteLine("Contanier remove successfully!");
+            if (currentWeight < GetMaxWeight())
             {
                 SetOverWeight(false);
                 SetReadyToGo(true);

@@ -21,5 +21,6 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
         public StorageStructure GetLocation();
         public bool IsLoaded();
         public void LoadedItem();
+        public void UnLoaded();
     }
 }

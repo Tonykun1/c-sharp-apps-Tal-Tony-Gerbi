@@ -34,21 +34,11 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
             if (IsHaveRoom() && !IsOverload())
             {
                 item.PackageItem();
-                item. LoadedItem();
+                item.LoadedItem();
                 items.Add(item);
-                Console.WriteLine("-------------------------------");
-                Console.WriteLine($"item: {item.GetID()}  added seccufully to container \ntotal item  in container is {items.Count}");
                 currentVolume += item.GetVolume();
                 currentWeight += item.GetWeight();
-                Console.WriteLine(item);
-                Console.WriteLine("-------------------------------");
                 return true;
-            }
-            else
-            {
-                Console.WriteLine("-------------------------------");
-                Console.WriteLine("no space in container");
-                Console.WriteLine("-------------------------------");
             }
             
             return false;
@@ -75,6 +65,8 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
         {
             if (items.Remove(item))
             {
+                item.UnPackage();
+                item.UnLoaded();
                 currentVolume -= item.GetVolume();
                 currentWeight -= item.GetWeight();
                 return true;
@@ -135,9 +127,26 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
         {
             for (int i = 0; i < items.Count; i++)
             {
-                Console.WriteLine(items[i]);
+                if (IsHaveRoom() && !IsOverload())
+                {
+                    items[i].PackageItem();
+                    items[i].LoadedItem();
+                    items.Add(items[i]);
+                    Console.WriteLine("-------------------------------");
+                    Console.WriteLine($"item: {items[i].GetID()}  added seccufully to container \ntotal item  in container is {items.Count}");
+                    currentVolume += items[i].GetVolume();
+                    currentWeight += items[i].GetWeight();
+                    Console.WriteLine(items[i]);
+                    Console.WriteLine("-------------------------------");
+                }
+                else
+                {
+                    Console.WriteLine("-------------------------------");
+                    Console.WriteLine("no space in container");
+                    Console.WriteLine("-------------------------------");
+                }
             }
-  
+
         }
     }
 }

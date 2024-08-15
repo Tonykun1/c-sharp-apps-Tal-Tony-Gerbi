@@ -34,7 +34,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Abstracts
 
         public int GetID()
         {
-                return id;
+           return id;
         }
         public void SetLocation(StorageStructure location)
         {
@@ -75,6 +75,10 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Abstracts
         public bool IsLoaded()
         {
             return isLoaded;
+        }
+        public void UnLoaded()
+        {
+            isLoaded = false;
         }
         public void LoadedItem()
         {

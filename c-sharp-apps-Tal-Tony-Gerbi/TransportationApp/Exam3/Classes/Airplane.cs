@@ -28,6 +28,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
         {
             this.currentWeight = weight;
         }
+
         public double CalculatePrice(List<IPortable> items, int travelDistance)
         {
             int totalUnits = 0;

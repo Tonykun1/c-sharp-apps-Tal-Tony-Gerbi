@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Abstracts;
@@ -12,6 +13,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
     {
         private CargoType driverType;
         private List<IPortable> items;
+        private List<Container> containers;
         public Port(CargoType driverType, string country, string city, string address, int numAddress)
         : base(country, city, address, numAddress)
         {

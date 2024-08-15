@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Abstracts;
 using c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Interfaces;
 
@@ -15,14 +16,15 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
         private List<Crone> crones;
         private double currentVolume;
         private double currentWeight;
-
-        public Train(Driver driver, double maximumWeight, double maximumVolume, StorageStructure current_Port, StorageStructure next_Port, int next_Port_Distance, int numberOfCrones)
+        private int numberOfCrones;
+        public Train(Driver driver, Crone crone, double maximumWeight, double maximumVolume, StorageStructure current_Port, StorageStructure next_Port, int next_Port_Distance, int numberOfCrones)
             : base(driver, maximumWeight, maximumVolume, current_Port, next_Port, next_Port_Distance)
         {
             crones = new List<Crone>();
+            this.numberOfCrones = numberOfCrones;
             for (int i = 0; i < numberOfCrones; i++)
             {
-                crones.Add(new Crone(maximumVolume / numberOfCrones, maximumWeight / numberOfCrones));
+                crones.Add(new Crone(crone));
             }
             currentVolume = 0;
             currentWeight = 0;
@@ -38,41 +40,72 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
         public double CalculatePrice(List<IPortable> items, int travelDistance)
         {
             int totalUnits = 0;
-            for (int i = 0; i < items.Count; i++)
+            for (int i = 1; i < items.Count; i++)
             {
                 totalUnits += CalculateUnits(items[i]);
             }
             return totalUnits * travelDistance * RatePerKm;
         }
 
-        public void AddToCrone(IPortable item)
+        public void AddCrone(Crone newcrone)
         {
-            foreach (var crone in crones)
+            this.crones.Add(newcrone);
+            currentVolume += newcrone.GetCurrentVolume();
+            currentWeight += newcrone.GetCurrentWeight();
+            Console.WriteLine("New crone added successfully!");
+            if (IsOverload() && !GetOverWeight())
             {
-                if (crone.Load(item))
+                SetOverWeight(true);
+                SetReadyToGo(false);
+                Console.WriteLine("OVERWIGHT WARRNING!");
+            }
+        }
+        public void DisplayCrone()
+        {
+            for (int i = 0; i < crones.Count; i++)
+            {
+                Console.WriteLine($"crone : {i + 1}");
+                crones[i].ShowCroneList();
+                Console.WriteLine("-------------------------------------------------------");
+            }
+        }
+        public void RemoveCrone(Crone newcrone)
+        {
+             this.crones.Remove(newcrone);
+             currentVolume -= newcrone.GetCurrentVolume();
+             currentWeight -= newcrone.GetCurrentWeight();
+             this.numberOfCrones--;
+             Console.WriteLine("Crone removed successfully!");
+              if (!IsOverload() && GetOverWeight())
+              {
+                  SetOverWeight(false);
+                  SetReadyToGo(true);
+                  Console.WriteLine("Overweight removed and ready to go!");
+              }
+        }
+        public void RemoveCroneByIndex(int index)
+        {
+            if (index >= 0 && index < crones.Count)
+            {
+                Crone newcrone = crones[index];
+                crones.RemoveAt(index);
+                currentVolume -= newcrone.GetCurrentVolume();
+                currentWeight -= newcrone.GetCurrentWeight();
+                numberOfCrones--;  
+                Console.WriteLine($"Crone at index {index + 1} removed successfully!");
+
+                if (!IsOverload() && GetOverWeight())
                 {
-                    currentVolume += item.GetVolume();
-                    currentWeight += item.GetWeight();
-                    Console.WriteLine("Item added to a Crone successfully!");
-                    if (IsOverload() && !GetOverWeight())
-                    {
-                        SetOverWeight(true);
-                        Console.WriteLine("The train is now overloaded.");
-                    }
-                    return;
+                    SetOverWeight(false);
+                    SetReadyToGo(true);
+                    Console.WriteLine("Overweight removed and ready to go!");
                 }
             }
-            Console.WriteLine("No Crone has enough room for this item.");
-        }
-
-        public void AddToCrone(List<IPortable> items)
-        {
-            foreach (var item in items)
+            else
             {
-                AddToCrone(item);
+                Console.WriteLine("Invalid crone index!");
             }
         }
-
         public List<Crone> GetCrones()
         {
             return crones;

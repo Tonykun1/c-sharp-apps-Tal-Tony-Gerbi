@@ -42,8 +42,8 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Abstracts
 
         }
         public void SetDriver(Driver driver)
-        { 
-            this.driver = driver; 
+        {
+            this.driver = driver;
         }
         public bool Load(IPortable item)
         {
@@ -81,7 +81,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Abstracts
         }
         public void SetReadyToGo(bool readyToGo)
         {
-            this.ready_To_Go= readyToGo;
+            this.ready_To_Go = readyToGo;
         }
         public bool GetReadyToGo()
         {
@@ -95,9 +95,9 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Abstracts
         {
             return items.Remove(item);
         }
-        public  void ReadyToGo()
+        public void ReadyToGo()
         {
-           
+
             if (driver.Approve(cargoType, next_Port) && !GetOverWeight())
             {
                 ready_To_Go = true;
@@ -136,7 +136,30 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Abstracts
         {
             return GetCurrentWeight() > GetMaxWeight();
         }
-       
+        public void GoToNextDestinetion()
+        {
+            ReadyToGo();
+            if (next_Port == null)
+            {
+                Console.WriteLine("i dont have any next Destinetion port");
+            }
+            else if (ready_To_Go)
+            {
+                current_Port = next_Port;
+                next_Port = null;
+                Console.WriteLine($"{cargoType} u here");
+            }
+            else
+            {
+
+                Console.WriteLine("go to next port");
+            }
+        }
+        public void SetNextDestinetion(StorageStructure nextPort)
+        {
+            Console.WriteLine($"{driver.GetLastName()}  u need to back");
+            this.next_Port = nextPort;
+        }
         public double GetMaxVolume()
         {
             return maximumVolume;
@@ -151,20 +174,20 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Abstracts
         }
         public double GetCurrentVolume()
         {
-            double currentVolume = 0; 
+            double currentVolume = 0;
             for (int i = 0; i < items.Count; i++)
             {
-                currentVolume += items[i].GetVolume(); 
+                currentVolume += items[i].GetVolume();
             }
             return currentVolume;
         }
 
         public double GetCurrentWeight()
         {
-            double currentWeight = 0; 
+            double currentWeight = 0;
             for (int i = 0; i < items.Count; i++)
             {
-                currentWeight += items[i].GetWeight(); 
+                currentWeight += items[i].GetWeight();
             }
             return currentWeight;
         }
