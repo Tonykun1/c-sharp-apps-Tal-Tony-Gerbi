@@ -38,28 +38,31 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
         }
         public void AddContainer(Container newcontainer)
         {
+            Console.WriteLine($"Attempting to add container with volume {newcontainer.GetCurrentVolume()} and weight {newcontainer.GetCurrentWeight()}");
             if (currentVolume + newcontainer.GetCurrentVolume() <= GetMaxVolume())
             {
                 this.container.Add(newcontainer);
                 currentVolume += newcontainer.GetCurrentVolume();
                 currentWeight += newcontainer.GetCurrentWeight();
-                Console.WriteLine("New Contanier added successfully!");
+                Console.WriteLine($"Container added. Current volume: {currentVolume}, Current weight: {currentWeight}");
                 if (IsOverload() && !GetOverWeight())
                 {
                     SetOverWeight(true);
                     SetReadyToGo(false);
-                    Console.WriteLine("OVERWIGHT WARRNING!");
+                    Console.WriteLine("OVERWEIGHT WARNING!");
                 }
             }
             else
+            {
                 Console.WriteLine("Not enough volume to add the container");
+            }
         }
         public void DisplayContainers()
         {
             for (int i = 0; i < container.Count; i++)
             {
                 Console.WriteLine($"Container : {i + 1}");
-                container[i].ShowContainerList();
+                container[i].GetContainerList();
                 Console.WriteLine("-------------------------------------------------------");
             }
         }
@@ -99,9 +102,13 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
             }
             return units;
         }
-        public List<Container> GetContainer()
+        public List<Container> GetContainers()
         {
             return container;
+        }
+        public Container GetContainer()
+        {
+            return container[0];
         }
     }
 }

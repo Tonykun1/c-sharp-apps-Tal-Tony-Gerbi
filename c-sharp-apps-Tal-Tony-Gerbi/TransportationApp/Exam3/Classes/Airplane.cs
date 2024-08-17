@@ -55,7 +55,6 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
         {
             return container;
         }
-
         public void DisplayCargo()
         {
             Console.WriteLine($"Number of items in cargo: {GetContainer().GetItem().Count}");

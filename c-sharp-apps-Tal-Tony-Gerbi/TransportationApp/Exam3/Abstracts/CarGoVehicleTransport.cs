@@ -45,6 +45,9 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Abstracts
         {
             this.driver = driver;
         }
+        public Driver GetDriver() { 
+            return this.driver; 
+        }
         public bool Load(IPortable item)
         {
             if (IsHaveRoom() && !IsOverload())

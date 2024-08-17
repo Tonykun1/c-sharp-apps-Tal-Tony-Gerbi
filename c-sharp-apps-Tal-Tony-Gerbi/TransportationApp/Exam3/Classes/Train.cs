@@ -30,7 +30,14 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
             currentWeight = 0;
             this.cargoType = CargoType.Train;
         }
-
+        public Train(Driver driver, double maximumWeight, double maximumVolume, StorageStructure current_Port, StorageStructure next_Port, int next_Port_Distance)
+         : base(driver, maximumWeight, maximumVolume, current_Port, next_Port, next_Port_Distance)
+        {
+            crones = new List<Crone>();
+            currentVolume = 0;
+            currentWeight = 0;
+            this.cargoType = CargoType.Train;
+        }
         public double CalculatePrice(IPortable item, int travelDistance)
         {
             int units = CalculateUnits(item);
@@ -110,7 +117,10 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
         {
             return crones;
         }
-
+        public Crone GetCrone()
+        {
+            return crones[0];
+        }
         public int CalculateUnits(IPortable item)
         {
             int units = (int)(item.GetVolume() / 100) + (int)item.GetWeight();

@@ -48,16 +48,11 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
         {
             for (int i = 0; i < items.Count; i++)
             {
-
                 if (!Load(items[i]))
                 {
-                    Console.WriteLine("total volume in container: " + currentVolume);
-                    Console.WriteLine($"Number of items in cargo: {this.items.Count}");
-                    return false;
+                    return false; 
                 }
             }
-            Console.WriteLine("total volume in container: " + currentVolume);
-            Console.WriteLine($"Number of items in cargo: {this.items.Count}");
             return true;
         }
 
@@ -123,7 +118,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
         {
             return items;
         }
-        public void  ShowContainerList()
+        public void  GetContainerList()
         {
             for (int i = 0; i < items.Count; i++)
             {
