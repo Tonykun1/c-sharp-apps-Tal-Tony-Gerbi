@@ -78,34 +78,64 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
         }
         public void RemoveCrone(Crone newcrone)
         {
-             this.crones.Remove(newcrone);
-             currentVolume -= newcrone.GetCurrentVolume();
-             currentWeight -= newcrone.GetCurrentWeight();
-             this.numberOfCrones--;
-             Console.WriteLine("Crone removed successfully!");
-              if (!IsOverload() && GetOverWeight())
-              {
-                  SetOverWeight(false);
-                  SetReadyToGo(true);
-                  Console.WriteLine("Overweight removed and ready to go!");
-              }
+            this.crones.Remove(newcrone);
+            currentVolume -= newcrone.GetCurrentVolume();
+            currentWeight -= newcrone.GetCurrentWeight();
+            this.numberOfCrones--;
+            Console.WriteLine("Crone removed successfully!");
+            if (!IsOverload() && GetOverWeight())
+            {
+                SetOverWeight(false);
+                SetReadyToGo(true);
+                Console.WriteLine("Overweight removed and ready to go!");
+            }
         }
-        public void RemoveCroneByIndex(int index)
+        public void AddItemToCroneByIndex(int index, IPortable item)
         {
             if (index >= 0 && index < crones.Count)
             {
-                Crone newcrone = crones[index];
-                crones.RemoveAt(index);
-                currentVolume -= newcrone.GetCurrentVolume();
-                currentWeight -= newcrone.GetCurrentWeight();
-                numberOfCrones--;  
-                Console.WriteLine($"Crone at index {index + 1} removed successfully!");
-
-                if (!IsOverload() && GetOverWeight())
+                if (IsHaveRoom() && !IsOverload())
                 {
-                    SetOverWeight(false);
-                    SetReadyToGo(true);
-                    Console.WriteLine("Overweight removed and ready to go!");
+                    crones[index].Load(item);
+                    currentVolume += item.GetVolume();
+                    currentWeight += item.GetWeight();
+                    Console.WriteLine($"Item added to crone at index {index + 1} successfully!");
+                }
+                else if (IsOverload() || GetOverWeight())
+                {
+                    SetOverWeight(true);
+                    SetReadyToGo(false);
+                    Console.WriteLine("Overweight detected, not ready to go!");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid crone index!");
+            }
+        }
+        public void RemoveItemFromCroneByIndex(int index, IPortable item)
+        {
+            if (index >= 0 && index < crones.Count)
+            {
+                Crone NEWCrone = crones[index];
+
+                if (NEWCrone.Contains(item))  
+                {
+                    NEWCrone.Unload(item); 
+                    currentVolume -= item.GetVolume();
+                    currentWeight -= item.GetWeight();
+                    Console.WriteLine($"Item removed from crone at index {index + 1} successfully!");
+
+                    if (!IsOverload() && GetOverWeight())
+                    {
+                        SetOverWeight(false);
+                        SetReadyToGo(true);
+                        Console.WriteLine("Overweight removed and ready to go!");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Item not found in the specified crone!");
                 }
             }
             else

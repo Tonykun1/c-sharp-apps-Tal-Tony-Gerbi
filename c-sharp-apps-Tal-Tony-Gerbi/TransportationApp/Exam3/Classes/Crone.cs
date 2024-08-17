@@ -133,7 +133,10 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3.Classes
         {
             return currentWeight;
         }
-
+        public bool Contains(IPortable item)
+        {
+            return items.Contains(item);
+        }
         public string GetPricingList()
         {
             return "";
