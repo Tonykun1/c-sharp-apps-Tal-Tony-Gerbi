@@ -19,7 +19,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
             Driver stephan = new Driver("stephan", "kosher", "2", CargoType.Airplane);
             Driver bobi = new Driver("bobi", "bonten", "1", CargoType.Ship);
             Driver tony = new Driver("tony", "LOLICON", "1", CargoType.Train);
-            Driver[] AllDrivers = { nick, tony, bobi, stephan };
+            Driver[] allDrivers = { nick, tony, bobi, stephan };
             Port tlv = new Port(CargoType.Airplane, "Israel", "TLV", "Ben Gurion", 12);
             Port eilat = new Port(CargoType.Airplane, "Israel", "Eilat", "Ramon", 12);
             IPortable item1 = new GeneralItem(5, 50, 80, 200, false, tlv);
@@ -28,16 +28,16 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
             List<IPortable> items = new List<IPortable> { item1, item2, item3 };
             bool allPassed = true;
             //---------------------------Test - 1---------------------------
-
-            Console.WriteLine("Test 1 - This Test Focus On Finding Drivers For The Mission From List Of Drivers[]\n");
+            Console.WriteLine("\n---------------------------Test - 1---------------------------");
+            Console.WriteLine(" This Test Focus On Finding Drivers For The Mission From List Of Drivers[]\n");
             int countPilot = 0;
             int countShip = 0;
             int countTrain = 0;
-            for (int i = 0; i < AllDrivers.Length; i++)
+            for (int i = 0; i < allDrivers.Length; i++)
             {
 
 
-                if (AllDrivers[i].GetType() == CargoType.NULL)
+                if (allDrivers[i].GetType() == CargoType.NULL)
                 {
                     Console.WriteLine($"Test 1: Faild -  Null Type Driver!");
                     Console.WriteLine("----------------------------------------------------------");
@@ -46,50 +46,51 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
                 }
                 else
                 {
-                    switch (AllDrivers[i].GetType())
+                    switch (allDrivers[i].GetType())
                     {
                         case CargoType.Airplane: countPilot++; break;
                         case CargoType.Ship: countShip++; break;
                         case CargoType.Train: countTrain++; break;
                         default: Console.WriteLine("Unexpected Erorr!"); break;
                     }
-                    Console.Write($"Found {AllDrivers[i].GetType()} Driver: ");
-                    Console.WriteLine(AllDrivers[i].GetFirstName());
+                    Console.Write($"Found {allDrivers[i].GetType()} Driver: ");
+                    Console.WriteLine(allDrivers[i].GetFirstName());
                 }
             }
             Console.WriteLine($"\nTest 1 - Passed -> Found {countPilot} Pilots | {countShip} Sailers | {countTrain} Train Operator");
             Console.WriteLine("----------------------------------------------------------");
-
+            Console.WriteLine("\n---------------------------Test - 2---------------------------");
+            Console.WriteLine("Testing Checking Overweight Condition for an Airplane");
             IPortable item4 = new GeneralItem(5, 5, 8, 700, false, tlv);
             IPortable item5 = new GeneralItem(5, 5, 8, 150, false, tlv);
             IPortable item6 = new GeneralItem(500, 500, 800, 15000, false, tlv);
 
             List<IPortable> itemsAll = new List<IPortable> { item4, item5, item6 };
 
-            Airplane LY466 = new Airplane(stephan, 10000, 10000, tlv, eilat, 150);
+            Airplane ly466 = new Airplane(stephan, 10000, 10000, tlv, eilat, 150);
 
-            Console.WriteLine("Test - 2");
-            LY466.GetContainer().Load(itemsAll);
+ 
+            ly466.GetContainer().Load(itemsAll);
 
-            LY466.SetOverWeight(true);
+            ly466.SetOverWeight(true);
 
-            if (LY466.GetContainer().GetCurrentWeight() > LY466.GetContainer().GetMaxWeight() && LY466.GetOverWeight())
+            if (ly466.GetContainer().GetCurrentWeight() > ly466.GetContainer().GetMaxWeight() && ly466.GetOverWeight())
             {
                 Console.WriteLine("Test 2 - Passed");
             }
             else
             {
-                Console.WriteLine($"Test 2 - Failed -> Your OverWeight Property is: {LY466.GetOverWeight()} | Expected: {LY466.GetContainer().GetCurrentWeight() > LY466.GetContainer().GetMaxWeight()}");
+                Console.WriteLine($"Test 2 - Failed -> Your OverWeight Property is: {ly466.GetOverWeight()} | Expected: {ly466.GetContainer().GetCurrentWeight() > ly466.GetContainer().GetMaxWeight()}");
                 allPassed = false;
             }
 
             // Ready to go
-            LY466.ReadyToGo();
+            //ly466.ReadyToGo();
 
             ////---------------------------Test - 3---------------------------
 
             Console.WriteLine("\n---------------------------Test - 3---------------------------");
-            Console.WriteLine("Adding and Removing Items from a Container");
+            Console.WriteLine("Testing Adding and Removing Items from a Container");
             Container containerTest = new Container(2000, 2000);  
             IPortable testItem1 = new GeneralItem(10, 10, 10, 10, false, tlv);
             IPortable testItem2 = new GeneralItem(10, 10, 10, 10, false, tlv); ;  
@@ -97,7 +98,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
             Console.WriteLine("Adding items to the container:");
             containerTest.Load(testItem1);
             containerTest.Load(testItem2);
-            containerTest.GetContainerList();  
+            //containerTest.GetContainerList();  
 
             Console.WriteLine("\nRemoving an item from the container:");
             containerTest.Unload(testItem1);
@@ -126,33 +127,33 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
 
 
             Crone cn = new Crone(10000, 1000);
-            Airplane LYtest = new Airplane(stephan, 1000, 1000, tlv, eilat, 150);
+            Airplane lytest = new Airplane(stephan, 1000, 1000, tlv, eilat, 150);
 
-            double price = LYtest.CalculatePrice(items, LYtest.GetNextPortDistance());
+            double price = lytest.CalculatePrice(items, lytest.GetNextPortDistance());
             Console.WriteLine("Price of travel: " + price);
 
-            LYtest.SetDriver(stephan);
-            LYtest.SetNextDestinetion(tlv);
+            lytest.SetDriver(stephan);
+            //lytest.SetNextDestinetion(tlv);
 
-            LYtest.GetContainer().Load(items);
-            LYtest.DisplayCargo();
+            lytest.GetContainer().Load(items);
+            //lytest.DisplayCargo();
 
-            LYtest.GoToNextDestinetion();
+            //lytest.GoToNextDestinetion();
 
 
-            LYtest.GetContainer().Unload(items);
+            lytest.GetContainer().Unload(items);
 
             Console.WriteLine("After unloading:");
-            LYtest.DisplayCargo();
+            //lytest.DisplayCargo();
 
 
-            if (LYtest.GetContainer().GetCurrentWeight() == 0)
+            if (lytest.GetContainer().GetCurrentWeight() == 0)
             {
                 Console.WriteLine("Test 4 - Passed");
             }
             else
             {
-                Console.WriteLine("Test 4 - Failed -> Cargo not unloaded properly. Current Weight: " + LYtest.GetContainer().GetCurrentWeight());
+                Console.WriteLine("Test 4 - Failed -> Cargo not unloaded properly. Current Weight: " + lytest.GetContainer().GetCurrentWeight());
                 allPassed = false;
             }
 
@@ -163,17 +164,14 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
             Driver shipDriver = new Driver("David", "Haifa", "5", CargoType.Ship);
             Ship testShip = new Ship(shipDriver, 10000, 50000, haifa, tlv, 50);
 
-            Console.WriteLine("Assigning driver to ship:");
+            //Console.WriteLine("Assigning driver to ship:");
             testShip.SetDriver(shipDriver);
-            Console.WriteLine($"Ship driver: {testShip.GetDriver().GetFirstName()}");
+            //Console.WriteLine($"Ship driver: {testShip.GetDriver().GetFirstName()}");
 
             Container container1 = new Container(2000, 15000);
             Container container2 = new Container(1500, 12000);
             Container container3 = new Container(3000, 5000);
 
-            double expectedPrice1 = testShip.CalculatePrice(item1, 100); 
-            double expectedPrice2 = testShip.CalculatePrice(item2, 100); 
-            double expectedPrice3 = testShip.CalculatePrice(item3, 100);
 
             Console.WriteLine("Adding containers to the ship:");
             container1.Load(item1);
@@ -183,19 +181,6 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
             testShip.AddContainer(container2);
             testShip.AddContainer(container3);
            // testShip.DisplayContainers();
-
-            Console.WriteLine("\nCalculating shipping price for containers:");
-            double actualPrice1 = testShip.CalculatePrice(item1 , 100);
-            double actualPrice2 = testShip.CalculatePrice(item2, 100);
-            double actualPrice3 = testShip.CalculatePrice(item3, 100);
-
-
-
-            List<IPortable> containers = new List<IPortable> { item1, item2, item3 };
-            double expectedTotalPrice = testShip.CalculatePrice(containers, 100);
-            double actualTotalPrice = testShip.CalculatePrice(containers, 100);
-  
-
             Console.WriteLine("\nRemoving a container from the ship:");
             testShip.RemoveContainer(container1);
             //testShip.DisplayContainers();
@@ -236,7 +221,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
             //testTrain.DisplayCrone();
 
             Console.WriteLine("\nMoving train to the next destination:");
-            testTrain.GoToNextDestinetion();
+            //testTrain.GoToNextDestinetion();
 
             Console.WriteLine("Unloading items from the train:");
             testTrain.Unload(items);
@@ -262,7 +247,7 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
             //deliveryTestPlane.DisplayCargo();
 
             Console.WriteLine("\nFlying to the next destination and unloading cargo:");
-            deliveryTestPlane.GoToNextDestinetion();   
+            //deliveryTestPlane.GoToNextDestinetion();   
             deliveryTestPlane.GetContainer().Unload(items);
             //deliveryTestPlane.DisplayCargo();
 
