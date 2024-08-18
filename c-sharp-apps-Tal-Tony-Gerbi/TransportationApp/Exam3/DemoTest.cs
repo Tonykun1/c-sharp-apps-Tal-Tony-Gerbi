@@ -296,8 +296,6 @@ namespace c_sharp_apps_Tal_Tony_Gerbi.TransportationApp.Exam3
             double expectedPrice = priceTestTrain.CalculatePrice(testItemForPrice, priceTestTrain.GetNextPortDistance());
             double actualPrice = priceTestTrain.CalculatePrice(testItemForPrice, priceTestTrain.GetNextPortDistance());
 
-            Console.WriteLine($"Expected Price: ${expectedPrice}");
-            Console.WriteLine($"Actual Price: ${actualPrice}");
 
             if (Math.Abs(expectedPrice - actualPrice) < 0.01) 
             {
